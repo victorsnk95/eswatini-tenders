@@ -1,0 +1,19 @@
+{
+ "updated": "2026-11-12T13:51:32Z",
+ "log": [
+  "ESPPRA (official): 2 items"
+ ],
+ "tenders": {
+  "3017186ec44f": {
+   "id": "3017186ec44f",
+   "first_seen": "2026-11-12T13:51:32Z",
+   "title": "Standard Bidding Documents",
+   "url": "https://www.esppra.co.sz/sbds.php",
+   "closing": null,
+   "source": "ESPPRA (official)",
+   "last_seen": "2026-11-12T13:51:32Z",
+   "is_new": true,
+   "status": "open"
+  }
+ }
+}
