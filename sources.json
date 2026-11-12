@@ -1,4 +1,3 @@
 [
-  {"name": "ESPPRA (official)", "url": "https://www.esppra.co.sz/", "enabled": true},
-  {"name": "Add another portal here", "url": "https://example.co.sz/tenders", "enabled": false}
+  {"name": "ESPPRA (official)", "type": "esppra", "url": "https://esppra.co.sz/tender.php", "enabled": true}
 ]
