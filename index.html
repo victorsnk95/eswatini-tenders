@@ -12,9 +12,9 @@ input,select{padding:9px 11px;border:1px solid var(--bd);border-radius:8px;backg
 input{flex:1;min-width:180px}.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:10px}
 .card a{color:var(--tx);font-weight:600;text-decoration:none}.card a:hover{color:var(--ac)}
 .meta{color:var(--mu);font-size:.82rem;margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
-.tag{padding:1px 8px;border-radius:99px;font-size:.75rem;border:1px solid var(--ac);color:var(--ac)}.tag.s{border-color:var(--warn);color:var(--warn)}
+.ent{font-size:.88rem;margin-top:2px}.dl{color:var(--ac)!important;font-weight:600!important}.tag{padding:1px 8px;border-radius:99px;font-size:.75rem;border:1px solid var(--ac);color:var(--ac)}.tag.s{border-color:var(--warn);color:var(--warn)}
 </style></head><body>
-<header><h1>🇸🇿 Eswatini Tender Tracker</h1>
+<header><h1>Eswatini Tender Tracker</h1>
 <div class="sub" id="upd">Loading…</div>
 <div class="bar"><input id="q" placeholder="Search tenders…">
 <select id="st"><option value="">Open &amp; new</option><option value="new">New today</option><option value="soon">Closing in 7 days</option><option value="expired">Expired</option><option value="all">All</option></select>
@@ -26,14 +26,17 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const days=d=>d?Math.ceil((new Date(d)-new Date().setHours(0,0,0,0))/864e5):null;
 function render(){
   const q=$('q').value.toLowerCase(),st=$('st').value,so=$('so').value;
-  const r=T.filter(t=>(!q||t.title.toLowerCase().includes(q))&&(so==='Source'||t.source===so)&&(
+  const r=T.filter(t=>(!q||(t.title+' '+(t.entity||'')+' '+(t.reference||'')).toLowerCase().includes(q))&&(so==='Source'||t.source===so)&&(
     st==='all'||(st==='new'&&t.is_new)||(st==='expired'&&t.status==='expired')||
     (st==='soon'&&t.closing&&days(t.closing)>=0&&days(t.closing)<=7)||(st===''&&['open'].includes(t.status))))
    .sort((a,b)=>(a.closing||'9999').localeCompare(b.closing||'9999'));
   $('list').innerHTML=r.length?r.map(t=>{const d=days(t.closing);
    return `<div class="card"><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a>
+   ${t.entity?`<div class="ent">${esc(t.entity)}</div>`:''}
    <div class="meta">${t.is_new?'<span class="tag">NEW</span>':''}${d!==null&&d>=0&&d<=7?`<span class="tag s">closes in ${d}d</span>`:''}
-   <span>${esc(t.source)}</span><span>${t.closing?'Closes '+esc(t.closing):'Closing date: see notice'}</span></div></div>`}).join('')
+   ${t.reference?`<span>Ref: ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}
+   <span>${t.closing_text?'Closes: '+esc(t.closing_text):(t.closing?'Closes '+esc(t.closing):'Closing date: see notice')}</span>
+   <a class="dl" href="${esc(t.url)}" target="_blank" rel="noopener">Download ↗</a></div></div>`}).join('')
    :'<p class="sub">No tenders match.</p>';
 }
 fetch('tenders.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{
