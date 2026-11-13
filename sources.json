@@ -1,3 +1,7 @@
 [
-  {"name": "ESPPRA (official)", "type": "esppra", "url": "https://esppra.co.sz/tender.php", "enabled": true}
+  {"name": "ESPPRA (official)", "type": "esppra", "url": "https://esppra.co.sz/tender.php", "enabled": true},
+  {"name": "EWADE", "type": "links", "url": "https://www.ewade.co.sz/tenders/", "enabled": true},
+  {"name": "EWSC (Water Services Corporation)", "type": "links", "url": "https://ewsc.co.sz/tenders/", "enabled": true},
+  {"name": "Royal Eswatini Sugar (RES)", "type": "res", "url": "https://www.res.co.sz/procurement/tenders.php", "enabled": true},
+  {"name": "Ubombo Sugar", "type": "links", "url": "https://ubombosugar.com/tenders.php", "enabled": true}
 ]
