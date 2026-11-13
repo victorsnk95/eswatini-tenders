@@ -1,7 +1,11 @@
 {
- "updated": "2026-11-13T04:08:48Z",
+ "updated": "2026-11-13T18:56:11Z",
  "log": [
-  "ESPPRA (official): 44 tenders"
+  "ESPPRA (official): 40 tenders",
+  "EWADE: 10 tenders",
+  "EWSC (Water Services Corporation): no tenders listed right now",
+  "Royal Eswatini Sugar (RES): 5 tenders",
+  "Ubombo Sugar: no tenders listed right now"
  ],
  "tenders": {
   "3017186ec44f": {
@@ -29,7 +33,7 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-13T04:08:48Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed"
   },
   "0e2b0f4bae1a": {
    "id": "0e2b0f4bae1a",
@@ -45,7 +49,7 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-13T04:08:48Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed"
   },
   "f1f7750bbbe6": {
    "id": "f1f7750bbbe6",
@@ -61,7 +65,7 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-13T04:08:48Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed"
   },
   "e6632363a5d6": {
    "id": "e6632363a5d6",
@@ -77,7 +81,7 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-13T04:08:48Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed"
   },
   "58519afbe765": {
    "id": "58519afbe765",
@@ -93,7 +97,7 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-13T04:08:48Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed"
   },
   "1c4f248e5a77": {
    "id": "1c4f248e5a77",
@@ -109,7 +113,7 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-13T04:08:48Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed"
   },
   "a1205f833273": {
    "id": "a1205f833273",
@@ -123,7 +127,7 @@
    "closing": "2026-11-16",
    "closing_text": "Monday 16th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -139,7 +143,7 @@
    "closing": "2026-11-16",
    "closing_text": "Monday 16th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -155,7 +159,7 @@
    "closing": "2026-11-16",
    "closing_text": "Monday 16th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -171,7 +175,7 @@
    "closing": "2026-11-17",
    "closing_text": "Tuesday 17th November 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -187,7 +191,7 @@
    "closing": "2026-11-17",
    "closing_text": "Tuesday 17th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -203,7 +207,7 @@
    "closing": "2026-11-17",
    "closing_text": "Tuesday 17th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -219,7 +223,7 @@
    "closing": "2026-11-18",
    "closing_text": "Wednesday 18th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -235,7 +239,7 @@
    "closing": "2026-11-18",
    "closing_text": "Wednesday 18th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -251,7 +255,7 @@
    "closing": "2026-11-19",
    "closing_text": "Thursday 19th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -267,7 +271,7 @@
    "closing": "2026-11-20",
    "closing_text": "Friday 20th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -283,7 +287,7 @@
    "closing": "2026-11-20",
    "closing_text": "Friday 20th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -299,7 +303,7 @@
    "closing": "2026-11-20",
    "closing_text": "Friday 20th November 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -315,7 +319,7 @@
    "closing": "2026-11-20",
    "closing_text": "Friday 20th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -331,7 +335,7 @@
    "closing": "2026-11-20",
    "closing_text": "Friday 20th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -347,7 +351,7 @@
    "closing": "2026-11-23",
    "closing_text": "Monday 23rd November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -363,7 +367,7 @@
    "closing": "2026-11-27",
    "closing_text": "Friday 27th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -379,7 +383,7 @@
    "closing": "2026-11-27",
    "closing_text": "Friday 27th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -395,7 +399,7 @@
    "closing": "2026-11-27",
    "closing_text": "Friday 27th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -411,7 +415,7 @@
    "closing": "2026-11-28",
    "closing_text": "Saturday 28th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -427,7 +431,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -443,7 +447,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -459,7 +463,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -475,7 +479,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -491,7 +495,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -507,7 +511,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -523,7 +527,7 @@
    "closing": "2026-12-02",
    "closing_text": "Wednesday 2nd December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -539,7 +543,7 @@
    "closing": "2026-12-07",
    "closing_text": "Monday 7th December 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -555,7 +559,7 @@
    "closing": "2026-12-07",
    "closing_text": "Monday 7th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -571,7 +575,7 @@
    "closing": "2026-12-10",
    "closing_text": "Thursday 10th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -587,7 +591,7 @@
    "closing": "2026-12-10",
    "closing_text": "Thursday 10th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -603,7 +607,7 @@
    "closing": "2026-12-11",
    "closing_text": "Friday 11th December 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -619,7 +623,7 @@
    "closing": "2026-12-11",
    "closing_text": "Friday 11th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -635,7 +639,7 @@
    "closing": "2026-12-11",
    "closing_text": "Friday 11th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -651,7 +655,7 @@
    "closing": "2026-12-14",
    "closing_text": "Monday 14th December 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -667,7 +671,7 @@
    "closing": "2026-12-15",
    "closing_text": "Tuesday 15th December 2026 2:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -683,7 +687,7 @@
    "closing": "2026-12-21",
    "closing_text": "Monday 21st December 2026 4:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -699,7 +703,7 @@
    "closing": "2026-12-30",
    "closing_text": "Wednesday 30th December 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
    "status": "open"
   },
@@ -715,8 +719,290 @@
    "closing": "2027-01-05",
    "closing_text": "Tuesday 5th January 2027 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-13T04:08:48Z",
+   "last_seen": "2026-11-13T18:56:03Z",
    "is_new": false,
+   "status": "open"
+  },
+  "fbf6c339961d": {
+   "id": "fbf6c339961d",
+   "first_seen": "2026-11-13T18:56:03Z",
+   "title": "SUPPLY & DELIVERY OF LAPTOPS",
+   "url": "https://esppra.co.sz/documents/tenders/Southern%20African%20Nazarene%20University%20_SANU_/tender_20261113_123917_c71a0f1495967ab3.pdf",
+   "entity": "Southern African Nazarene University (SANU)",
+   "reference": "SANU ITB#001 OF 2026/27",
+   "method": "Request For Tender",
+   "type": "Open Tender",
+   "closing": "2026-11-27",
+   "closing_text": "Friday 27th November 2026 10:00 am",
+   "source": "ESPPRA (official)",
+   "last_seen": "2026-11-13T18:56:03Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "b710efa4768b": {
+   "id": "b710efa4768b",
+   "first_seen": "2026-11-13T18:56:03Z",
+   "title": "Provision of Internal Audit and Risk Management Services",
+   "url": "https://esppra.co.sz/documents/tenders/Matsapha%20Town%20Council/tender_20261113_121442_4861a3dece1e2338.pdf",
+   "entity": "Matsapha Town Council",
+   "reference": "MTC004 OF 2026/2027",
+   "method": "Request For Proposal",
+   "type": "Open Tender",
+   "closing": "2026-12-14",
+   "closing_text": "Monday 14th December 2026 10:00 am",
+   "source": "ESPPRA (official)",
+   "last_seen": "2026-11-13T18:56:03Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "f1f5e8f69698": {
+   "id": "f1f5e8f69698",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "EYEOP BDS EOI Advert",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/10/EYEOP-BDS-EOI-Advert.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-10",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "110c10e1db72": {
+   "id": "110c10e1db72",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "EWADE/0791 - REOI Prequalification of Suppliers.",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/09/EWADE-0791-Advert.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-09",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "300ba01630d9": {
+   "id": "300ba01630d9",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "REOI Advertisement Individual Consultants - GALS TA.",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/07/REOI-Advertisement-Individual-Consultants-GALS-TA.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-07",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "86dc0285284d": {
+   "id": "86dc0285284d",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "EWADE-0776-Request for Proposals - for A Feasibility Study on the Enhancement the Agriculture Intergrated Information System (AIIS)",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/03/EWADE-0776-Advert.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-03",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "17c7a37c2fe2": {
+   "id": "17c7a37c2fe2",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "Addendum Request for Expressions of Interest Feasibility Studies",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/02/Addendum-Request-for-Expressions-of-Interest-Feasibility-Studies.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-02",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "23492039a154": {
+   "id": "23492039a154",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "TENDER NO. EWADE/0769 \u2013 feasibility studies and detailed design for small to medium sized earth dams, irrigation system and related infrastructure in the four regions of eswatini.",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/02/Feasibility-Study-REOI.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-02",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "629beefa3dc2": {
+   "id": "629beefa3dc2",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "EWADE/0774 supply and delivery of SAPEMP project vehicles.",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/01/Motor-Vehicles-EWADE-0774-Advert.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-01",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "4c2a39a24dc8": {
+   "id": "4c2a39a24dc8",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "EWADE-0785-Proposal For Consultancy Services For The Environment And Social Compliance Audit",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/10/Consultancy-services-for-MNWAP-ES-compliance-Audit_2026_.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-10",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "20e172cbf910": {
+   "id": "20e172cbf910",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "EWADE-0752-Supply-and-delivery-of-canal-sealing-material",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2026/07/EWADE-0786-APPROVED-TENDER-DOCUMENT.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2026-07",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "bb1c84802eab": {
+   "id": "bb1c84802eab",
+   "first_seen": "2026-11-13T18:56:05Z",
+   "title": "Specific Procurement Notice SNFI.3 Revised 14.11.2024 Vsn 4",
+   "url": "https://www.ewade.co.sz/wp-content/uploads/2025/02/Specific-Procurement-Notice-SNFI.3-Revised-14.11.2024-Vsn-4-1.pdf",
+   "entity": "EWADE",
+   "reference": "",
+   "method": "",
+   "type": "",
+   "closing": null,
+   "closing_text": "",
+   "posted": "2025-02",
+   "source": "EWADE",
+   "last_seen": "2026-11-13T18:56:05Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "ce63c73e306c": {
+   "id": "ce63c73e306c",
+   "first_seen": "2026-11-13T18:56:09Z",
+   "title": "Provision Of Aerial Crop Spraying Services",
+   "url": "https://www.res.co.sz/procurement/tenders.php#RES062/AGAGR/2026",
+   "entity": "Royal Eswatini Sugar (RES)",
+   "reference": "RES062/AGAGR/2026",
+   "method": "",
+   "type": "Restricted Tender",
+   "closing": "2026-12-02",
+   "closing_text": "2026-12-02",
+   "source": "Royal Eswatini Sugar (RES)",
+   "last_seen": "2026-11-13T18:56:09Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "009d2371a604": {
+   "id": "009d2371a604",
+   "first_seen": "2026-11-13T18:56:09Z",
+   "title": "Supply And Delivery Of Motor Grader",
+   "url": "https://www.res.co.sz/procurement/tenders.php#RES061/AGOAS/2026",
+   "entity": "Royal Eswatini Sugar (RES)",
+   "reference": "RES061/AGOAS/2026",
+   "method": "",
+   "type": "Restricted Tender",
+   "closing": "2026-11-20",
+   "closing_text": "2026-11-20",
+   "source": "Royal Eswatini Sugar (RES)",
+   "last_seen": "2026-11-13T18:56:09Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "da83c490f7f1": {
+   "id": "da83c490f7f1",
+   "first_seen": "2026-11-13T18:56:09Z",
+   "title": "Development Of Res Data Warehouse",
+   "url": "https://www.res.co.sz/procurement/tenders.php#RES059/COAIT/2026",
+   "entity": "Royal Eswatini Sugar (RES)",
+   "reference": "RES059/COAIT/2026",
+   "method": "",
+   "type": "Restricted Tender",
+   "closing": "2026-11-27",
+   "closing_text": "2026-11-27",
+   "source": "Royal Eswatini Sugar (RES)",
+   "last_seen": "2026-11-13T18:56:09Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "0d212708de01": {
+   "id": "0d212708de01",
+   "first_seen": "2026-11-13T18:56:09Z",
+   "title": "Factories Offcrop Scaffolding",
+   "url": "https://www.res.co.sz/procurement/tenders.php#RES058/MFMHF/2026",
+   "entity": "Royal Eswatini Sugar (RES)",
+   "reference": "RES058/MFMHF/2026",
+   "method": "",
+   "type": "Restricted Tender",
+   "closing": "2026-11-13",
+   "closing_text": "2026-11-13",
+   "source": "Royal Eswatini Sugar (RES)",
+   "last_seen": "2026-11-13T18:56:09Z",
+   "is_new": true,
+   "status": "open"
+  },
+  "42ed79a2dfc1": {
+   "id": "42ed79a2dfc1",
+   "first_seen": "2026-11-13T18:56:09Z",
+   "title": "Supply, Supervision Of Installation And Commissioning Alfa Laval Decanter Model \u201cProdec \u2013 72",
+   "url": "https://www.res.co.sz/procurement/tenders.php#RES057/CMDIS/2026",
+   "entity": "Royal Eswatini Sugar (RES)",
+   "reference": "RES057/CMDIS/2026",
+   "method": "",
+   "type": "Restricted Tender",
+   "closing": "2026-11-20",
+   "closing_text": "2026-11-20",
+   "source": "Royal Eswatini Sugar (RES)",
+   "last_seen": "2026-11-13T18:56:09Z",
+   "is_new": true,
    "status": "open"
   }
  }
