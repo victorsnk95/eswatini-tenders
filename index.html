@@ -4,7 +4,7 @@
 <title>Sandile Tender Tracker</title>
 <style>
 :root{--bg:#f3f1ea;--card:#fff;--tx:#14181f;--mu:#5d6675;--bd:#e3dfd3;--blue:#3e5eb9;--onb:#fff;--yel:#ffd900;--red:#b10c0c;--ok:#0f8a4f;--warn:#c76a00;--hl:#fff6cf;--sh:0 1px 2px rgba(0,0,0,.06)}
-@media(prefers-color-scheme:dark){:root{--bg:#0d1220;--card:#18213a;--tx:#eef1f8;--mu:#9aa6c0;--bd:#26314f;--blue:#7b97ee;--onb:#0d1220;--red:#ff7a7a;--ok:#4cd694;--warn:#ffa84d;--hl:#2d2b15;--sh:none}}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--card:#18213a;--tx:#eef1f8;--mu:#9aa6c0;--bd:#26314f;--blue:#7b97ee;--onb:#0d1220;--red:#ff7a7a;--ok:#4cd694;--warn:#ffa84d;--hl:#2d2b15;--sh:none}}:root[data-theme="dark"]{--bg:#0d1220;--card:#18213a;--tx:#eef1f8;--mu:#9aa6c0;--bd:#26314f;--blue:#7b97ee;--onb:#0d1220;--red:#ff7a7a;--ok:#4cd694;--warn:#ffa84d;--hl:#2d2b15;--sh:none}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;font:15px/1.5 system-ui,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:env(safe-area-inset-bottom,0px)}
 .flag{height:6px;background:linear-gradient(90deg,var(--blue) 0 34%,var(--yel) 34% 66%,#b10c0c 66%)}
@@ -51,27 +51,70 @@ label.ck{font-size:.85rem;color:var(--mu);display:flex;gap:6px;align-items:cente
 .more{width:100%;padding:9px;border:1px dashed var(--bd);background:none;color:var(--mu);border-radius:10px;cursor:pointer;font:inherit}
 .empty{text-align:center;color:var(--mu);padding:50px 10px}.src{display:flex;gap:6px;flex-wrap:wrap;font-size:.78rem}
 .src span{border:1px solid var(--bd);border-radius:99px;padding:2px 10px;background:var(--card)}.src .ok:before{content:"● ";color:var(--ok)}.src .idle:before{content:"● ";color:var(--mu)}.src .bad:before{content:"● ";color:var(--red)}
+
+.hero{position:relative;border:1px solid var(--bd);border-radius:22px;margin-top:14px;padding:calc(22px + env(safe-area-inset-top,0px)) 22px 18px;overflow:hidden;background:radial-gradient(520px 200px at 8% 0%,rgba(62,94,185,.38),transparent 70%),radial-gradient(420px 200px at 92% 8%,rgba(255,217,0,.30),transparent 70%),radial-gradient(460px 220px at 55% 130%,rgba(177,12,12,.28),transparent 70%),var(--card)}
+.hi{font-size:.95rem;color:var(--mu);margin-bottom:2px}
+.tg{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:1.1rem;cursor:pointer}
+.tick{display:flex;align-items:stretch;border:1px solid var(--bd);border-radius:12px;background:var(--card);margin:14px 0 0;overflow:hidden}
+.tick>b{flex:none;background:var(--red);color:#fff;padding:8px 13px;font-size:.74rem;letter-spacing:.06em;display:flex;align-items:center}
+.tkw{overflow:hidden;flex:1;white-space:nowrap;display:flex;align-items:center}
+.tk{display:inline-block;padding-left:100%;animation:mq 50s linear infinite}.tick:hover .tk{animation-play-state:paused}
+.tk span{margin-right:38px;font-size:.86rem}.tk em{font-style:normal;font-weight:800;color:var(--warn)}.tk small{color:var(--mu)}
+@keyframes mq{to{transform:translateX(-100%)}}
+.c{transition:transform .15s,box-shadow .15s;animation:rise .4s both;animation-delay:calc(var(--i,0)*35ms)}
+.c:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.16)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}.noanim .c{animation:none}
+.c.watch{outline:2px solid #a855f7aa}
+.hd2{display:flex;gap:8px;justify-content:space-between;align-items:flex-start}
+.sv{flex:none;background:none;border:0;font-size:1.4rem;line-height:1;cursor:pointer;color:var(--mu);opacity:.45;padding:0 2px;transition:transform .15s,opacity .15s}
+.sv:hover{transform:scale(1.25);opacity:1}.sv.on{color:#f5b700;opacity:1;text-shadow:0 0 12px rgba(255,200,0,.7)}
+.ft span:last-child{display:flex;gap:10px;align-items:center}
+.ic{font:inherit;background:none;border:1px solid var(--bd);border-radius:8px;padding:2px 9px;cursor:pointer;color:var(--tx);font-size:.76rem}.ic:hover{border-color:var(--blue)}
+.nw{background:linear-gradient(90deg,#e11d48,#ff5c8a,#e11d48);background-size:200% 100%;animation:sh 3s linear infinite}@keyframes sh{to{background-position:-200% 0}}
+.mch{background:linear-gradient(90deg,#7c3aed,#c026d3);color:#fff;padding:1px 9px;border-radius:99px;font-size:.74rem;font-weight:700}
+.st{transition:transform .15s}.st:not(.static):hover{transform:translateY(-3px)}.st.sav b{color:#d99a00}.st.mat b{color:#a855f7}
+#wt{width:100%;padding:10px 13px;border:1px dashed #a855f7;border-radius:10px;background:var(--card);color:var(--tx);font:inherit;margin:10px 0 2px}
+.cats{margin-top:8px}.chip.cp{border-style:dashed}
+@media(prefers-reduced-motion:reduce){.tk,.nw,.c{animation:none}.tk{padding-left:0}.tkw{overflow-x:auto}}
 </style></head><body>
 <div class="flag"></div>
 <div class="wrap">
-<header class="hero"><h1><span>Sandile</span> Tender Tracker</h1>
+<header class="hero"><button class="tg" data-theme="1" aria-label="Switch light or dark theme" title="Light / dark">◐</button><div class="hi" id="hi"></div><h1><span>Sandile</span> Tender Tracker</h1>
 <p class="tag">Every open tender from Eswatini’s public portals, on one radar.</p>
 <div class="live"><i class="dot"></i><span id="ago">Scanning…</span></div></header>
+<div id="tick"></div>
 <div class="stats" id="stats"></div>
 <h2>Closing in the next 4 weeks <span style="text-transform:none;letter-spacing:0">(tap a day)</span></h2>
 <div class="heat" id="heat"></div>
 <div class="bar2"><input type="search" id="q" placeholder="Search title, organisation or reference…">
 <div class="seg"><button data-view="board" id="vb">Board</button><button data-view="list" id="vl">List</button></div>
 <label class="ck"><input type="checkbox" id="ex"> Show closed</label></div>
+<input id="wt" placeholder="🎯 Watchlist: keywords to highlight, comma separated (e.g. solar, roads, laptops)">
 <div class="chips" id="orgs"></div>
+<div class="chips cats" id="cats"></div>
 <main id="main"></main>
 <h2>Source health</h2><div class="src" id="src"></div>
 </div>
 <script>
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let T=[],UPD=null,LOG=[];
-const S={q:'',org:'',mode:'all',day:'',exp:false,view:'board',open:{}};
+let T=[],UPD=null,LOG=[],SINCE=0,ANIM=true;
+const ST={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+let SAVED=new Set(ST.get('saved',[])),WATCH=ST.get('watch',[]);const LAST=ST.get('lastVisit',0);
+{const th=ST.get('theme',null);if(th)document.documentElement.dataset.theme=th}
+const CATS=[['Construction','🏗️',/construct|build|road|rehabilit|upgrad|refurb|renovat|civil|fenc|bridge|\bdams?\b|pipeline/i],['Consultancy','🧠',/consult|advisory|expert|feasib|stud(y|ies)|audit|eoi|expressions? of interest|proposal/i],['IT & Telecom','💻',/\bIT\b|software|hardware|\bict\b|network|computer|digital|telephone|licen[cs]e/i],['Health','🩺',/health|medical|pharma|vaccin|hospital|clinic|malaria|laborator/i],['Water & Energy','💧',/water|sewer|wastewater|solar|electric|energy|power|irrigation|borehole|streetlight/i],['Vehicles & Plant','🚜',/vehicle|plant\b|grader|truck|tractor|machinery|motor|fleet|boiler|spray/i],['Security & Facilities','🛡️',/security|clean|catering|facilit|insurance|travel|uniform|furniture|stationery|printing/i],['Supply & Goods','📦',/suppl|deliver|purchase|provision of/i],['Other','📋',/./]];
+const catOf=t=>CATS.find(c=>c[2].test(t.title))[0],catIcon=t=>CATS.find(c=>c[2].test(t.title))[1];
+const watched=t=>WATCH.length&&WATCH.some(w=>(t.title+' '+org(t)).toLowerCase().includes(w));
+function ics(id){const t=T.find(x=>x.id===id);if(!t||!t.closing)return;
+  const e=s=>String(s).replace(/[\\,;]/g,m=>'\\'+m).replace(/\n/g,'\\n'),d=t.closing.replace(/-/g,'');
+  const body=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Sandile Tender Tracker//EN','BEGIN:VEVENT','UID:'+t.id+'@sandile-tenders','DTSTAMP:'+new Date().toISOString().replace(/[-:]|\.\d+/g,''),'DTSTART;VALUE=DATE:'+d,'SUMMARY:'+e('Tender closes: '+t.title),'DESCRIPTION:'+e(org(t)+(t.reference?' | Ref '+t.reference:'')+' | '+t.url),'BEGIN:VALARM','TRIGGER:-P2D','ACTION:DISPLAY','DESCRIPTION:Tender closes in 2 days','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([body],{type:'text/calendar'}));a.download='tender-closing-'+d+'.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+function copyList(b){const txt=T.filter(t=>SAVED.has(t.id)).sort(byClose).map(t=>`• ${t.title} | ${org(t)} | ${t.closing_text||t.closing||'see notice'}\n  ${t.url}`).join('\n');
+  const done=()=>{b.textContent='✓ Copied';setTimeout(()=>b.textContent='📋 Copy shortlist',1800)};
+  try{navigator.clipboard.writeText(txt).then(done)}catch{}}
+function countUp(){if(!ANIM||matchMedia('(prefers-reduced-motion:reduce)').matches)return;ANIM=false;
+  document.querySelectorAll('.st b[data-n]').forEach(el=>{const to=+el.dataset.n,t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/700);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)})}
+const S={q:'',cat:'',org:'',mode:'all',day:'',exp:false,view:'board',open:{}};
 const NEW_DAYS=3,CAP=6;   // NEW_DAYS: how long a tender counts as new; CAP: cards shown per lane before "show more"
 const sod=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
 const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -91,18 +134,24 @@ function match(t){
   if(S.org&&org(t)!==S.org)return false;
   if(S.mode==='new'&&!isFresh(t))return false;
   if(S.mode==='soon'&&!soon(t))return false;
+  if(S.cat&&catOf(t)!==S.cat)return false;if(S.mode==='saved'&&!SAVED.has(t.id))return false;if(S.mode==='watch'&&!watched(t))return false;
   if(S.day&&t.closing!==S.day)return false;return true}
-function card(t){const[p,pc]=pill(t),f=isFresh(t),r=/restricted/i.test(t.type||'');
+function card(t,i){const[p,pc]=pill(t),f=isFresh(t),r=/restricted/i.test(t.type||''),w=watched(t);
   const when=t.closing_text?'Closes '+t.closing_text:t.closing?'Closes '+t.closing:'Deadline in notice'+(t.posted?' · posted '+t.posted:'');
-  return `<article class="c ${pc}${f?' fresh':''}"><a class="ti" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a>
-  <div class="en">${esc(org(t))}</div><div class="mt"><span class="pill ${pc}">${p}</span>${f?`<span class="nw">${freshLabel(t)}</span>`:''}${r?'<span class="rs">Restricted: invited suppliers</span>':''}${t.reference?`<span>Ref ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}</div>
-  <div class="ft"><span>${esc(when)}</span><a class="dl" href="${esc(t.url)}" target="_blank" rel="noopener">Download ↗</a></div></article>`}
+  return `<article class="c ${pc}${f?' fresh':''}${w?' watch':''}" style="--i:${Math.min(i||0,10)}"><div class="hd2"><a class="ti" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a><button class="sv${SAVED.has(t.id)?' on':''}" data-save="${esc(t.id)}" aria-label="Save tender" title="${SAVED.has(t.id)?'Remove from saved':'Save this tender'}">★</button></div>
+  <div class="en">${esc(org(t))} · ${catIcon(t)} ${catOf(t)}</div><div class="mt"><span class="pill ${pc}">${p}</span>${f?`<span class="nw">${freshLabel(t)}</span>`:''}${w?'<span class="mch">🎯 Watch match</span>':''}${r?'<span class="rs">Restricted: invited suppliers</span>':''}${t.status==='removed'?'<span class="rs">No longer listed</span>':''}${t.reference?`<span>Ref ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}</div>
+  <div class="ft"><span>${esc(when)}</span><span>${t.closing&&dleft(t)>=0?`<button class="ic" data-ics="${esc(t.id)}" title="Add the closing date to your calendar, with a 2-day reminder">📅 Remind me</button>`:''}<a class="dl" href="${esc(t.url)}" target="_blank" rel="noopener">Download ↗</a></span></div></article>`}
 const LANES=[['s','Closing this week','7 days or less. Move fast.'],['f','Just landed','Spotted in the last '+NEW_DAYS+' days'],['m','Next 30 days',''],['l','Later','More than a month away'],['n','Check the notice','No deadline on the listing'],['x','Recently closed','']];
 const laneOf=t=>{const d=dleft(t);if(d===null)return 'n';if(d<0)return 'x';if(d<=7)return 's';if(isFresh(t))return 'f';return d<=30?'m':'l'};
 const byClose=(a,b)=>(a.closing||'9999').localeCompare(b.closing||'9999');
-function stats(){const L=live(),n=[['all',L.length,'Open tenders',''],['new',L.filter(isFresh).length,'New in '+NEW_DAYS+' days','new'],['soon',L.filter(soon).length,'Closing this week','soon']];
-  return n.map(([m,v,l,c])=>`<button class="st ${c}${S.mode===m?' on':''}" data-mode="${m}"><b>${v}</b><small>${l}</small></button>`).join('')+
-  `<div class="st static"><b>${new Set(L.map(org)).size}</b><small>Organisations</small></div>`}
+function stats(){const L=live(),sv=T.filter(t=>SAVED.has(t.id)).length;
+  const n=[['all',L.length,'Open tenders',''],['new',L.filter(isFresh).length,'New in '+NEW_DAYS+' days','new'],['soon',L.filter(soon).length,'Closing this week','soon'],['saved',sv,'★ Saved','sav']];
+  if(WATCH.length)n.push(['watch',L.filter(watched).length,'🎯 Watch matches','mat']);
+  return n.map(([m,v,l,c])=>`<button class="st ${c}${S.mode===m?' on':''}" data-mode="${m}"><b data-n="${v}">${v}</b><small>${l}</small></button>`).join('')+`<div class="st static"><b>${new Set(L.map(org)).size}</b><small>Organisations</small></div>`}
+function ticker(){const a=live().filter(soon).sort(byClose).slice(0,10);if(!a.length)return '';
+  return `<div class="tick"><b>⏰ CLOSING SOON</b><div class="tkw"><div class="tk">${a.map(t=>`<span><em>${pill(t)[0]}</em> ${esc(t.title)} <small>(${esc(org(t))})</small></span>`).join('')}</div></div></div>`}
+function cats(){const c={};live().forEach(t=>c[catOf(t)]=(c[catOf(t)]||0)+1);
+  return `<button class="chip${S.cat?'':' on'}" data-cat="">All types</button>`+CATS.filter(x=>c[x[0]]).map(x=>`<button class="chip${S.cat===x[0]?' on':''}" data-cat="${x[0]}">${x[1]} ${x[0]}<b>${c[x[0]]}</b></button>`).join('')}
 function heat(){const base=sod(new Date()),cnt={};live().forEach(t=>{if(t.closing)cnt[t.closing]=(cnt[t.closing]||0)+1});
   let h='';for(let i=0;i<28;i++){const d=new Date(base);d.setDate(base.getDate()+i);const k=iso(d),n=cnt[k]||0;
     h+=`<button class="hd${n?' has':''}${i<=7?' near':''}${i===0?' today':''}${S.day===k?' on':''}" data-day="${k}" title="${n} closing on ${k}"><span class="bar"><i style="height:${n?Math.min(100,22+n*26):6}%"></i></span><b>${d.getDate()}</b><small>${i===0||d.getDate()===1?d.toLocaleString('en',{month:'short'}):''}</small></button>`}
@@ -110,28 +159,38 @@ function heat(){const base=sod(new Date()),cnt={};live().forEach(t=>{if(t.closin
 function orgs(){const c={};live().forEach(t=>c[org(t)]=(c[org(t)]||0)+1);
   return `<button class="chip${S.org?'':' on'}" data-org="">All</button>`+Object.entries(c).sort((a,b)=>b[1]-a[1]).map(([o,n])=>`<button class="chip${S.org===o?' on':''}" data-org="${esc(o)}">${esc(o)}<b>${n}</b></button>`).join('')}
 function main(){
-  const r=T.filter(t=>(t.status==='open'||(S.exp&&t.status==='expired'))&&match(t));
+  const r=T.filter(t=>(S.mode==='saved'||t.status==='open'||(S.exp&&t.status==='expired'))&&match(t));
   const day=S.day?`<p><button class="chip on" data-day="${S.day}">Closing on ${S.day} ✕</button></p>`:'';
-  if(!r.length)return day+'<div class="empty"><h3>Nothing here, yet.</h3>The radar checks again every couple of hours. Try clearing a filter.</div>';
+  const cp=S.mode==='saved'&&r.length?'<p><button class="chip cp" data-copy="1">📋 Copy shortlist</button></p>':'';
+  if(!r.length)return day+(S.mode==='saved'?'<div class="empty"><h3>★ Your shortlist is empty</h3>Tap the star on any tender to keep it here. Saved tenders stay in this browser, even after they close.</div>':'<div class="empty"><h3>Nothing here, yet.</h3>The radar checks again every couple of hours. Try clearing a filter.</div>');
   const g={};r.forEach(t=>(g[laneOf(t)]=g[laneOf(t)]||[]).push(t));
   const html=LANES.filter(([k])=>g[k]).map(([k,title,sub])=>{
     const a=g[k].sort(k==='f'?(x,y)=>dayAge(x)-dayAge(y)||byClose(x,y):k==='n'?(x,y)=>y.first_seen.localeCompare(x.first_seen):byClose);
     const shown=S.open[k]?a:a.slice(0,CAP);
-    return `<section class="ln l-${k}"><h3>${title}<span>${a.length}</span></h3>${sub?`<p>${sub}</p>`:'<p></p>'}${shown.map(card).join('')}${a.length>shown.length?`<button class="more" data-more="${k}">Show ${a.length-shown.length} more</button>`:''}</section>`}).join('');
-  return day+`<div class="${S.view==='list'?'stack':'board'}">${html}</div>`}
+    return `<section class="ln l-${k}"><h3>${title}<span>${a.length}</span></h3>${sub?`<p>${sub}</p>`:'<p></p>'}${shown.map((t,i)=>card(t,i)).join('')}${a.length>shown.length?`<button class="more" data-more="${k}">Show ${a.length-shown.length} more</button>`:''}</section>`}).join('');
+  return cp+day+`<div class="${S.view==='list'?'stack':'board'}">${html}</div>`}
 function srcs(){return LOG.map(l=>{const i=l.indexOf(': '),n=l.slice(0,i),r=l.slice(i+2);
   return `<span class="${/FAILED/.test(r)?'bad':/no tenders/.test(r)?'idle':'ok'}">${esc(n)} · ${/FAILED/.test(r)?'could not load':/no tenders/.test(r)?'none listed':esc(r.replace(' tenders',''))}</span>`}).join('')}
-function render(){$('stats').innerHTML=stats();$('heat').innerHTML=heat();$('orgs').innerHTML=orgs();$('main').innerHTML=main();$('src').innerHTML=srcs();
-  $('vb').className=S.view==='board'?'on':'';$('vl').className=S.view==='list'?'on':''}
+function render(quiet){document.body.classList.toggle('noanim',!!quiet);
+  $('stats').innerHTML=stats();$('tick').innerHTML=ticker();$('heat').innerHTML=heat();$('orgs').innerHTML=orgs();$('cats').innerHTML=cats();$('main').innerHTML=main();$('src').innerHTML=srcs();
+  $('vb').className=S.view==='board'?'on':'';$('vl').className=S.view==='list'?'on':'';countUp()}
 const ago=d=>{const m=Math.floor((Date.now()-d)/6e4);if(m<1)return 'just now';if(m<60)return m+' min ago';const h=Math.floor(m/60);return h<24?h+' h '+(m%60)+' min ago':Math.floor(h/24)+' days ago'};
-function tick(){if(!UPD)return;$('ago').textContent='Radar last swept '+ago(UPD);$('ago').title=UPD.toLocaleString()}
+function tick(){if(!UPD)return;$('ago').textContent='Radar last swept '+ago(UPD)+(SINCE?` · ${SINCE} new since your last visit`:'');$('ago').title=UPD.toLocaleString()}
 function load(first){return fetch('tenders.json?'+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
-  T=Object.values(j.tenders);LOG=j.log||[];UPD=new Date(j.updated);tick();render();
+  T=Object.values(j.tenders);LOG=j.log||[];UPD=new Date(j.updated);if(first){SINCE=LAST?live().filter(t=>new Date(t.first_seen)>LAST).length:0;ST.set('lastVisit',Date.now())}tick();render(!first);
 }).catch(()=>{if(first)$('ago').textContent='No data yet. Run scraper.py to create tenders.json'})}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-mode],[data-org],[data-day],[data-view],[data-more]');if(!b)return;const d=b.dataset;
-  if('mode' in d)S.mode=S.mode===d.mode?'all':d.mode;if('org' in d)S.org=d.org;if('day' in d)S.day=S.day===d.day?'':d.day;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme]');if(!b)return;const d=b.dataset;
+  if('save' in d){SAVED.has(d.save)?SAVED.delete(d.save):SAVED.add(d.save);ST.set('saved',[...SAVED]);render(true);return}
+  if('ics' in d){ics(d.ics);return}if('copy' in d){copyList(b);return}
+  if('theme' in d){const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),nx=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=nx;ST.set('theme',nx);return}
+  if('mode' in d)S.mode=S.mode===d.mode?'all':d.mode;if('org' in d)S.org=d.org;if('cat' in d)S.cat=d.cat;if('day' in d)S.day=S.day===d.day?'':d.day;
   if('view' in d)S.view=d.view;if('more' in d)S.open[d.more]=true;render()});
 $('q').addEventListener('input',e=>{S.q=e.target.value.toLowerCase();render()});
 $('ex').addEventListener('change',e=>{S.exp=e.target.checked;render()});
+{const hr=new Date().getHours();$('hi').textContent=(hr<12?'Good morning':hr<18?'Good afternoon':'Good evening')+', Sandile 👋'}
+$('wt').value=WATCH.join(', ');
+$('wt').addEventListener('input',e=>{WATCH=e.target.value.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);ST.set('watch',WATCH);render(true)});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT/.test(document.activeElement.tagName)){e.preventDefault();$('q').focus()}
+  if(e.key==='Escape'){Object.assign(S,{q:'',cat:'',org:'',mode:'all',day:''});$('q').value='';$('q').blur();render()}});
 load(true);setInterval(tick,30000);setInterval(load,300000);
 </script></body></html>
