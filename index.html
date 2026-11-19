@@ -109,6 +109,29 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .dn{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.dn ul{list-style:none;margin:0;padding:0;font-size:.82rem}.dn li{margin:3px 0}.dn li i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px}
 .ob{display:grid;grid-template-columns:130px 1fr 24px;gap:8px;align-items:center;font-size:.8rem;margin:7px 0;cursor:pointer}.ob span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ob i{display:block;height:10px;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--red))}
 .sp{display:flex;gap:4px;height:130px}.sp div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.65rem;color:var(--mu)}.sp i{display:block;width:100%;min-height:2px;border-radius:4px 4px 0 0;background:linear-gradient(var(--blue),var(--red))}
+
+.ws{position:fixed;inset:0;z-index:65;background:var(--bg);display:none;flex-direction:column;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);animation:wsin .25s}
+.ws.on{display:flex}body.wso{overflow:hidden}@keyframes wsin{from{opacity:0;transform:scale(.985)}}
+.wh{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--bd);background:var(--card)}
+.wh h2{margin:0;font-size:1.15rem;text-transform:none;letter-spacing:0;color:var(--tx)}.wh .sp1{flex:1}
+.wcnt{display:flex;gap:6px;flex-wrap:wrap;font-size:.76rem}.wcnt span{border-radius:99px;padding:2px 10px;color:#fff;font-weight:600}
+.wurg{font-size:.82rem;color:var(--red);font-weight:700}
+.wb{flex:1;display:grid;grid-template-columns:1fr 410px;min-height:0}
+.wc{display:flex;flex-direction:column;padding:14px;min-height:0}.wnav{display:flex;align-items:center;gap:10px;margin-bottom:10px}.wnav h3{margin:0;flex:1;text-align:center;font-size:1.25rem}
+.wdw{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:4px;text-align:center;font-size:.72rem;color:var(--mu);text-transform:uppercase}
+.wg{flex:1;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:minmax(0,1fr);gap:6px;min-height:0}
+.wd{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:5px 6px;overflow:hidden;min-height:0}.wd.off{background:none;border:0}.wd.td{outline:2px solid var(--blue)}.wd>b{font-size:.78rem;color:var(--mu)}.wd small{font-size:.65rem;color:var(--mu)}
+.wch{font-size:.7rem;border-radius:6px;padding:2px 6px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;color:#fff;border:2px solid transparent}.wch.sel{border-color:var(--yel)}
+.s-todo{background:#3e5eb9}.s-prep{background:#c76a00}.s-ready{background:#7c3aed}.s-sub{background:#0f8a4f}.s-miss{background:#b10c0c}.s-drop{background:var(--bd);color:var(--mu)!important;text-decoration:line-through}
+.wside{border-left:1px solid var(--bd);overflow:auto;padding:14px;background:var(--card)}
+.wdt{border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:14px;background:var(--bg)}.wdt h3{margin:0 0 2px;font-size:1.02rem}
+.stg{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.stg button{font:inherit;font-size:.78rem;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:99px;padding:4px 11px;cursor:pointer}.stg button.on{background:var(--blue);color:var(--onb);border-color:var(--blue);font-weight:700}
+.pg{height:7px;border-radius:99px;background:var(--bd);overflow:hidden;margin-top:6px}.pg i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#10b981);transition:width .4s}.pg.big{height:11px}
+.chk{list-style:none;margin:12px 0;padding:0}.chk li{margin:6px 0;font-size:.88rem}.chk input{margin-right:8px;width:16px;height:16px;vertical-align:-3px}
+#wsn{width:100%;min-height:80px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font:inherit;padding:9px;resize:vertical}.btn.ok{background:#0f8a4f;color:#fff;border-color:#0f8a4f}
+.wi{border:1px solid var(--bd);border-radius:12px;padding:9px 11px;margin-bottom:8px;cursor:pointer;background:var(--bg)}.wi.on{border-color:var(--yel);box-shadow:0 0 0 2px rgba(255,217,0,.35)}.wit{display:flex;justify-content:space-between;gap:8px;font-size:.88rem;font-weight:600}.wi small{color:var(--mu)}
+.wsb{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:16px;padding:14px 18px;margin:8px 0 14px;color:#fff;background:linear-gradient(120deg,#1d2f6b,#7c3aed)}.wsb small{display:block;opacity:.85}.wsb .btn{background:#fff;color:#1d2f6b;border:0}
+@media(max-width:860px){.wb{grid-template-columns:1fr;overflow:auto;display:block}.wg{min-height:62vh}.wside{border-left:0;border-top:1px solid var(--bd);overflow:visible}.wch{font-size:.6rem}}
 </style></head><body>
 <div class="flag"></div>
 <div class="wrap">
@@ -122,6 +145,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 <div class="heat" id="heat"></div>
 <div class="bar2"><input type="search" id="q" placeholder="Search title, organisation or reference…">
 <div class="seg"><button data-view="board">Board</button><button data-view="list">List</button><button data-view="cal">Calendar</button><button data-view="ins">Insights</button></div>
+<button class="kb" data-wsopen="1" title="Open your tender workspace">🗓️ Workspace</button>
 <button class="kb" data-pal="1" title="Command palette (Ctrl+K)">⌕ Ctrl K</button>
 <label class="ck"><input type="checkbox" id="ex"> Show closed</label></div>
 <input id="wt" placeholder="🎯 Watchlist: keywords to highlight, comma separated (e.g. solar, roads, laptops)">
@@ -132,6 +156,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 </div>
 <div class="sc" id="sc" data-close="1"></div><aside class="dr" id="dr" aria-label="Tender details"></aside>
 <div class="pl" id="pl"><div class="pb"><input id="pq" placeholder="Search tenders, jump to a view, filter by organisation…" autocomplete="off"><div id="pr"></div></div></div>
+<section class="ws" id="ws" aria-label="My tender workspace"></section>
 <div class="ts" id="ts"></div>
 <script>
 const $=id=>document.getElementById(id);
@@ -199,7 +224,7 @@ function orgs(){const c={};live().forEach(t=>c[org(t)]=(c[org(t)]||0)+1);
 function main(){
   const r=T.filter(t=>(S.mode==='saved'||t.status==='open'||(S.exp&&t.status==='expired'))&&match(t));
   const day=S.day?`<p><button class="chip on" data-day="${S.day}">Closing on ${S.day} ✕</button></p>`:'';
-  const cp=S.mode==='saved'&&r.length?'<p><button class="chip cp" data-copy="1">📋 Copy shortlist</button></p>':'';
+  const cp=S.mode==='saved'&&r.length?'<div class="wsb"><div><b>🗓️ My Tender Workspace</b><small>Track your starred tenders on a full-screen calendar, with checklists and progress until you submit.</small></div><button class="btn pri" data-wsopen="1">Open workspace →</button></div><p><button class="chip cp" data-copy="1">📋 Copy shortlist</button></p>':'';
   if(!r.length)return day+(S.mode==='saved'?'<div class="empty"><h3>★ Your shortlist is empty</h3>Tap the star on any tender to keep it here. Saved tenders stay in this browser, even after they close.</div>':'<div class="empty"><h3>Nothing here, yet.</h3>The radar checks again every couple of hours. Try clearing a filter.</div>');
   const g={};r.forEach(t=>(g[laneOf(t)]=g[laneOf(t)]||[]).push(t));
   const html=LANES.filter(([k])=>g[k]).map(([k,title,sub])=>{
@@ -220,10 +245,10 @@ function load(first){return fetch('tenders.json?'+Date.now(),{cache:'no-store'})
 document.addEventListener('click',e=>{const X=e.target;
   if(X.id==='pl'){closePal();return}
   const pi=X.closest('[data-pi]');if(pi){palRun(+pi.dataset.pi);return}
-  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm]');
+  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm],[data-wsopen]');
   if(!b){const k=X.closest('[data-id]');if(k&&!X.closest('a'))openDr(k.dataset.id);return}
   const d=b.dataset;
-  if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
+  if('wsopen' in d){openWs();return}if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
   if('save' in d){SAVED.has(d.save)?SAVED.delete(d.save):SAVED.add(d.save);ST.set('saved',[...SAVED]);toast(SAVED.has(d.save)?'★ Saved to your shortlist':'Removed from your shortlist');render(true);
     const el=document.querySelector('.sv.on[data-save="'+d.save+'"]');if(el)el.classList.add('pop');if(DR)openDr(DR);return}
   if('ics' in d){ics(d.ics);toast('📅 Reminder downloaded: open it to add to your calendar');return}
@@ -239,7 +264,7 @@ $('wt').addEventListener('input',e=>{WATCH=e.target.value.split(',').map(s=>s.tr
 document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPal();return}
   if(e.key==='/'&&!/INPUT/.test(document.activeElement.tagName)){e.preventDefault();$('q').focus()}
-  if(e.key==='Escape'){if($('pl').classList.contains('on'))closePal();else if(DR)closeDr();else{clearF();$('q').blur();render()}}});
+  if(e.key==='Escape'){if($('pl').classList.contains('on'))closePal();else if($('ws').classList.contains('on'))closeWs();else if(DR)closeDr();else{clearF();$('q').blur();render()}}});
 $('pq').addEventListener('input',()=>{PI=0;palRender()});
 $('pq').addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();PI=Math.min(PL.length-1,PI+1);palRender()}else if(e.key==='ArrowUp'){e.preventDefault();PI=Math.max(0,PI-1);palRender()}else if(e.key==='Enter')palRun(PI)});
 $('main').addEventListener('mousemove',e=>{const c=e.target.closest('.c');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px')}});
@@ -283,12 +308,53 @@ function insights(){const L=live(),cc={},oc={};L.forEach(t=>{cc[catOf(t)]=(cc[ca
 function openPal(){$('pl').classList.add('on');$('pq').value='';PI=0;palRender();$('pq').focus()}
 function closePal(){$('pl').classList.remove('on')}
 function palRender(){const q=$('pq').value.toLowerCase().trim(),has=s=>!q||s.toLowerCase().includes(q),L=[];
-  [['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
+  [['🗓️','Open my tender workspace',()=>openWs()],['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
   if(q){[...new Set(live().map(org))].filter(has).slice(0,4).forEach(o=>L.push({i:'🏢',t:o,s:'Filter by organisation',run:()=>{S.org=o;if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     CATS.filter(c=>c[0]!=='Other'&&has(c[0])).slice(0,3).forEach(c=>L.push({i:c[1],t:c[0],s:'Filter by type',run:()=>{S.cat=c[0];if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     live().filter(t=>has(t.title+' '+org(t)+' '+(t.reference||''))).slice(0,8).forEach(t=>L.push({i:'📄',t:t.title,s:org(t)+' · '+pill(t)[0],run:()=>openDr(t.id),keep:1}))}
   PL=L;PI=Math.min(PI,Math.max(0,L.length-1));
   $('pr').innerHTML=L.length?L.map((x,i)=>`<div class="pi${i===PI?' on':''}" data-pi="${i}"><span>${x.i}</span><div><b>${esc(x.t)}</b><small>${esc(x.s)}</small></div></div>`).join(''):'<div class="empty">No matches</div>'}
 function palRun(i){const x=PL[i];if(!x)return;closePal();x.run();render(!!x.keep)}
+
+let WORK=ST.get('work',{}),WS={cm:0,sel:null};
+const STG=[['todo','Not started'],['prep','Preparing'],['ready','Ready to submit'],['sub','Submitted ✓'],['drop','Not bidding']];
+const CHK=['Read the full tender document','Check eligibility and requirements','Tax clearance and compliance certificates','Company profile and references','Price the bid (BOQ or quotation)','Prepare the technical proposal','Final review of the whole bid','Deliver or upload before the deadline'];
+const wk=id=>WORK[id]||(WORK[id]={st:'todo',chk:[],note:''}),wsave=()=>ST.set('work',WORK);
+const mine=()=>T.filter(t=>SAVED.has(t.id)).sort(byClose);
+const wprog=id=>{const w=WORK[id];return w?Math.round(CHK.filter((_,i)=>w.chk[i]).length/CHK.length*100):0};
+const wstat=t=>{const w=WORK[t.id]||{st:'todo'};if(w.st==='sub'||w.st==='drop')return w.st;const d=dleft(t);return d!==null&&d<0?'miss':w.st};
+function autoStage(w){if(w.st==='drop')return;const n=CHK.filter((_,i)=>w.chk[i]).length,pre=CHK.slice(0,-1).filter((_,i)=>w.chk[i]).length;
+  if(n===CHK.length){w.st='sub';w.sub=iso(new Date())}else w.st=pre===CHK.length-1?'ready':n>0?'prep':'todo'}
+function openWs(id){const L=mine(),pick=L.find(t=>!['sub','drop'].includes(wstat(t))&&dleft(t)!==null&&dleft(t)>=0)||L.find(t=>!['sub','drop'].includes(wstat(t)))||L[0];
+  WS.sel=id||(pick&&pick.id)||null;const t=L.find(x=>x.id===WS.sel);WS.cm=0;
+  if(t&&t.closing){const a=new Date(),c=new Date(t.closing+'T00:00:00');WS.cm=(c.getFullYear()-a.getFullYear())*12+c.getMonth()-a.getMonth()}
+  $('ws').classList.add('on');document.body.classList.add('wso');wsRender()}
+function closeWs(){$('ws').classList.remove('on');document.body.classList.remove('wso');render(true)}
+function wsDetail(t){const w=WORK[t.id]||{st:'todo',chk:[],note:''},p=wprog(t.id),s=wstat(t),d=dleft(t);
+  const state=s==='sub'?`Submitted${w.sub?' on '+w.sub:''} ✓`:s==='miss'?'Deadline passed, not submitted':s==='drop'?'Not bidding':d===null?'See notice for the deadline':d===0?'Closes today':`${d} day${d===1?'':'s'} left`;
+  return `<div class="wdt"><h3>${esc(t.title)}</h3><p class="en">${esc(org(t))} · ${esc(t.closing_text||t.closing||'deadline in notice')}</p>
+  <div class="stg">${STG.map(([k,l])=>`<button class="${w.st===k?'on':''}" data-wsst="${k}">${l}</button>`).join('')}</div>
+  <div class="pg big"><i style="width:${p}%"></i></div><small>${p}% complete · <b>${state}</b></small>
+  <ul class="chk">${CHK.map((c,i)=>`<li><label><input type="checkbox" data-wsck="${i}" ${w.chk[i]?'checked':''}>${c}</label></li>`).join('')}</ul>
+  <textarea id="wsn" placeholder="Notes: contacts, prices, things to remember…">${esc(w.note||'')}</textarea>
+  <div class="acts"><a class="btn pri" href="${esc(t.url)}" target="_blank" rel="noopener">Open original ↗</a>${t.closing&&d>=0?`<button class="btn" data-ics="${esc(t.id)}">📅 Remind me</button>`:''}${s!=='sub'?'<button class="btn ok" data-wsst="sub">✓ Mark submitted</button>':''}</div></div>`}
+function wsRender(){const L=mine(),now=new Date(),first=new Date(now.getFullYear(),now.getMonth()+WS.cm,1),last=new Date(first.getFullYear(),first.getMonth()+1,0),by={},cnt={todo:0,prep:0,ready:0,sub:0,miss:0};
+  L.forEach(t=>{if(t.closing)(by[t.closing]=by[t.closing]||[]).push(t);const s=wstat(t);if(cnt[s]!==undefined)cnt[s]++});
+  const urg=L.filter(t=>['todo','prep','ready'].includes(wstat(t))&&dleft(t)!==null&&dleft(t)<=3).length;
+  let cells='';for(let i=0;i<first.getDay();i++)cells+='<div class="wd off"></div>';
+  for(let n=1;n<=last.getDate();n++){const k=iso(new Date(first.getFullYear(),first.getMonth(),n)),a=by[k]||[];
+    cells+=`<div class="wd${k===iso(now)?' td':''}"><b>${n}</b>${a.slice(0,4).map(t=>`<div class="wch s-${wstat(t)}${WS.sel===t.id?' sel':''}" data-ws="${esc(t.id)}" title="${esc(t.title)}">${wstat(t)==='sub'?'✓ ':''}${esc(t.title)}</div>`).join('')}${a.length>4?`<small>+${a.length-4} more</small>`:''}</div>`}
+  const sel=L.find(t=>t.id===WS.sel),C=[['todo','Not started','#3e5eb9'],['prep','Preparing','#c76a00'],['ready','Ready','#7c3aed'],['sub','Submitted','#0f8a4f'],['miss','Missed','#b10c0c']];
+  $('ws').innerHTML=`<div class="wh"><h2>🗓️ My Tender Workspace</h2><div class="wcnt">${C.filter(c=>cnt[c[0]]).map(c=>`<span style="background:${c[2]}">${cnt[c[0]]} ${c[1]}</span>`).join('')}</div>${urg?`<span class="wurg">⚠️ ${urg} closing within 3 days and not submitted</span>`:''}<span class="sp1"></span><button class="btn" data-wsclose="1">✕ Close (Esc)</button></div>
+  <div class="wb"><div class="wc"><div class="wnav"><button class="chip" data-wscm="-1">‹</button><h3>${first.toLocaleString('en',{month:'long',year:'numeric'})}</h3><button class="chip" data-wscm="1">›</button><button class="chip" data-wscm="today">Today</button></div>
+  <div class="wdw">${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(x=>`<div>${x}</div>`).join('')}</div><div class="wg">${cells}</div></div>
+  <div class="wside">${L.length?(sel?wsDetail(sel):'')+`<h4 style="margin:6px 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mu)">All saved tenders (${L.length})</h4>`+L.map(t=>`<div class="wi${WS.sel===t.id?' on':''}" data-ws="${esc(t.id)}"><div class="wit"><span>${esc(t.title)}</span><span class="pill ${wstat(t)==='sub'?'p0':pill(t)[1]}">${wstat(t)==='sub'?'submitted':pill(t)[0]}</span></div><small>${esc(org(t))}${t.closing?'':' · no deadline on listing'}</small><div class="pg"><i style="width:${wprog(t.id)}%"></i></div></div>`).join(''):'<div class="empty"><h3>★ Nothing saved yet</h3>Close this window and tap the star on a tender. It will appear here, on the calendar, ready for tracking.</div>'}</div></div>`}
+$('ws').addEventListener('click',e=>{const b=e.target.closest('[data-ws],[data-wsst],[data-wsclose],[data-wscm]');if(!b)return;const d=b.dataset;
+  if('wsclose' in d){closeWs();return}
+  if('wscm' in d){WS.cm=d.wscm==='today'?0:WS.cm+(+d.wscm);wsRender();return}
+  if('wsst' in d&&WS.sel){const w=wk(WS.sel);w.st=d.wsst;if(d.wsst==='sub'){w.sub=iso(new Date());CHK.forEach((_,i)=>w.chk[i]=true);toast('🎉 Marked as submitted. Well done!')}wsave();wsRender();return}
+  if('ws' in d){WS.sel=d.ws;wsRender()}});
+$('ws').addEventListener('change',e=>{const c=e.target.closest('[data-wsck]');if(!c||!WS.sel)return;const w=wk(WS.sel);w.chk[+c.dataset.wsck]=c.checked;autoStage(w);wsave();wsRender()});
+$('ws').addEventListener('input',e=>{if(e.target.id==='wsn'&&WS.sel){wk(WS.sel).note=e.target.value;wsave()}});
 load(true);setInterval(tick,30000);setInterval(spotTick,1000);setInterval(load,300000);
 </script></body></html>
