@@ -3,8 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sandile Tender Tracker</title>
 <style>
-:root{--bg:#f7f6f2;--card:#fff;--tx:#1d2420;--mu:#667069;--ac:#0b6b3a;--bd:#e2e0d8;--warn:#b45309}
-@media(prefers-color-scheme:dark){:root{--bg:#141815;--card:#1d231f;--tx:#eceee9;--mu:#9aa49c;--ac:#4cc783;--bd:#2d352f;--warn:#f0a85a}}
+:root{--bg:#f7f6f2;--card:#fff;--tx:#1d2420;--mu:#667069;--ac:#0b6b3a;--bd:#e2e0d8;--warn:#b45309;--hl:#fff6cf;--hlb:#f5b700}
+@media(prefers-color-scheme:dark){:root{--bg:#141815;--card:#1d231f;--tx:#eceee9;--mu:#9aa49c;--ac:#4cc783;--bd:#2d352f;--warn:#f0a85a;--hl:#3b3314;--hlb:#f5c542}}
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--tx)}
 header,main{max-width:900px;margin:auto;padding:16px}h1{margin:8px 0 2px;font-size:1.5rem}
 .sub{color:var(--mu);font-size:.85rem}.bar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
@@ -12,38 +12,59 @@ input,select{padding:9px 11px;border:1px solid var(--bd);border-radius:8px;backg
 input{flex:1;min-width:180px}.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:10px}
 .card a{color:var(--tx);font-weight:600;text-decoration:none}.card a:hover{color:var(--ac)}
 .meta{color:var(--mu);font-size:.82rem;margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
-.ent{font-size:.88rem;margin-top:2px}.dl{color:var(--ac)!important;font-weight:600!important}.tag{padding:1px 8px;border-radius:99px;font-size:.75rem;border:1px solid var(--ac);color:var(--ac)}.tag.s{border-color:var(--warn);color:var(--warn)}
+.ent{font-size:.88rem;margin-top:2px}.dl{color:var(--ac)!important;font-weight:600!important}.tag{padding:1px 8px;border-radius:99px;font-size:.75rem;border:1px solid var(--ac);color:var(--ac)}.card.fresh{background:var(--hl);border-color:var(--hlb);border-left:6px solid var(--hlb)}.tag.n{background:#e11d48;border-color:#e11d48;color:#fff;font-weight:700}.tag.s{border-color:var(--warn);color:var(--warn)}
 </style></head><body>
 <header><h1>Sandile Tender Tracker</h1>
 <div class="sub" id="upd">Loading…</div><div class="sub" id="log"></div>
 <div class="bar"><input id="q" placeholder="Search tenders…">
-<select id="st"><option value="">Open &amp; new</option><option value="new">New today</option><option value="soon">Closing in 7 days</option><option value="expired">Expired</option><option value="all">All</option></select>
+<select id="st"><option value="">Open &amp; new</option><option value="new">New (last 3 days)</option><option value="soon">Closing in 7 days</option><option value="expired">Expired</option><option value="all">All</option></select>
 <select id="so"><option value="">All organisations</option></select></div></header>
 <main id="list"></main>
 <script>
 const $=id=>document.getElementById(id);let T=[];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const days=d=>d?Math.ceil((new Date(d)-new Date().setHours(0,0,0,0))/864e5):null;
+const NEW_DAYS=3;   // a tender counts as NEW for this many days (today + the previous days)
+const dayAge=t=>{const a=new Date(t.first_seen),n=new Date();
+  return Math.round((new Date(n.getFullYear(),n.getMonth(),n.getDate())-new Date(a.getFullYear(),a.getMonth(),a.getDate()))/864e5)};
+const isFresh=t=>t.status==='open'&&dayAge(t)<NEW_DAYS;
+const freshLabel=t=>{const d=dayAge(t);return d<=0?'NEW today':d===1?'NEW yesterday':'NEW '+d+' days ago'};
 function render(){
   const q=$('q').value.toLowerCase(),st=$('st').value,so=$('so').value;
   const r=T.filter(t=>(!q||(t.title+' '+(t.entity||'')+' '+(t.reference||'')).toLowerCase().includes(q))&&((!so||(t.entity||t.source)===so))&&(
-    st==='all'||(st==='new'&&t.is_new)||(st==='expired'&&t.status==='expired')||
+    st==='all'||(st==='new'&&isFresh(t))||(st==='expired'&&t.status==='expired')||
     (st==='soon'&&t.closing&&days(t.closing)>=0&&days(t.closing)<=7)||(st===''&&['open'].includes(t.status))))
-   .sort((a,b)=>(a.closing||'9999').localeCompare(b.closing||'9999'));
+   .sort((a,b)=>{const fa=isFresh(a),fb=isFresh(b);
+     if(fa!==fb)return fa?-1:1;
+     if(fa&&fb&&dayAge(a)!==dayAge(b))return dayAge(a)-dayAge(b);
+     return (a.closing||'9999').localeCompare(b.closing||'9999')});
   $('list').innerHTML=r.length?r.map(t=>{const d=days(t.closing);
-   return `<div class="card"><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a>
+   return `<div class="card${isFresh(t)?' fresh':''}"><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a>
    ${t.entity?`<div class="ent">${esc(t.entity)}</div>`:''}
-   <div class="meta">${t.is_new?'<span class="tag">NEW</span>':''}${d!==null&&d>=0&&d<=7?`<span class="tag s">closes in ${d}d</span>`:''}
+   <div class="meta">${isFresh(t)?`<span class="tag n">${freshLabel(t)}</span>`:''}${d!==null&&d>=0&&d<=7?`<span class="tag s">closes in ${d}d</span>`:''}
    ${t.type&&/restricted/i.test(t.type)?'<span class="tag s">Restricted – invited suppliers</span>':''}${t.reference?`<span>Ref: ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}
    <span>${t.closing_text?'Closes: '+esc(t.closing_text):(t.closing?'Closes '+esc(t.closing):'Deadline: see notice'+(t.posted?' (posted '+esc(t.posted)+')':''))}</span>
    <a class="dl" href="${esc(t.url)}" target="_blank" rel="noopener">Download ↗</a></div></div>`}).join('')
    :'<p class="sub">No tenders match.</p>';
 }
-fetch('tenders.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{
-  T=Object.values(j.tenders);
-  $('upd').textContent=`${T.filter(t=>t.status==='open').length} open · last checked ${new Date(j.updated).toLocaleString()}`;
-  $('log').textContent='Sources checked: '+(j.log||[]).join(' · ');
-  [...new Set(T.map(t=>t.entity||t.source))].sort().forEach(s=>$('so').add(new Option(s,s)));render();
-}).catch(()=>{$('upd').textContent='No data yet — run scraper.py to create tenders.json';});
+let UPD=null,OPEN=0,NEWC=0;
+const ago=d=>{const m=Math.floor((Date.now()-d)/6e4);
+  if(m<1)return 'just now';if(m<60)return m+' min ago';
+  const hr=Math.floor(m/60);if(hr<24)return hr+' h '+(m%60)+' min ago';
+  return Math.floor(hr/24)+' days ago'};
+function tick(){if(!UPD)return;
+  $('upd').textContent=`${OPEN} open · ${NEWC} new · last checked ${ago(UPD)}`;
+  $('upd').title=UPD.toLocaleString()}
+function load(first){
+  return fetch('tenders.json?'+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
+    const changed=!UPD||new Date(j.updated)-UPD!==0;
+    T=Object.values(j.tenders);OPEN=T.filter(t=>t.status==='open').length;NEWC=T.filter(isFresh).length;UPD=new Date(j.updated);tick();
+    $('log').textContent='Sources checked: '+(j.log||[]).join(' · ');
+    if(changed){const cur=$('so').value;$('so').length=1;
+      [...new Set(T.map(t=>t.entity||t.source))].sort().forEach(s=>$('so').add(new Option(s,s)));
+      $('so').value=cur;render();}
+  }).catch(()=>{if(first)$('upd').textContent='No data yet — run scraper.py to create tenders.json';});
+}
+load(true);setInterval(tick,30000);setInterval(load,300000);
 ['input','change'].forEach(e=>document.addEventListener(e,render));
 </script></body></html>
