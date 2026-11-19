@@ -3,68 +3,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sandile Tender Tracker</title>
 <style>
-:root{--bg:#f7f6f2;--card:#fff;--tx:#1d2420;--mu:#667069;--ac:#0b6b3a;--bd:#e2e0d8;--warn:#b45309;--hl:#fff6cf;--hlb:#f5b700}
-@media(prefers-color-scheme:dark){:root{--bg:#141815;--card:#1d231f;--tx:#eceee9;--mu:#9aa49c;--ac:#4cc783;--bd:#2d352f;--warn:#f0a85a;--hl:#3b3314;--hlb:#f5c542}}
-*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--tx)}
-header,main{max-width:900px;margin:auto;padding:16px}h1{margin:8px 0 2px;font-size:1.5rem}
-.sub{color:var(--mu);font-size:.85rem}.bar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
-input,select{padding:9px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}
-input{flex:1;min-width:180px}.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:10px}
-.card a{color:var(--tx);font-weight:600;text-decoration:none}.card a:hover{color:var(--ac)}
-.meta{color:var(--mu);font-size:.82rem;margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
-.ent{font-size:.88rem;margin-top:2px}.dl{color:var(--ac)!important;font-weight:600!important}.tag{padding:1px 8px;border-radius:99px;font-size:.75rem;border:1px solid var(--ac);color:var(--ac)}.card.fresh{background:var(--hl);border-color:var(--hlb);border-left:6px solid var(--hlb)}.tag.n{background:#e11d48;border-color:#e11d48;color:#fff;font-weight:700}.tag.s{border-color:var(--warn);color:var(--warn)}
+:root{--bg:#f3f1ea;--card:#fff;--tx:#14181f;--mu:#5d6675;--bd:#e3dfd3;--blue:#3e5eb9;--onb:#fff;--yel:#ffd900;--red:#b10c0c;--ok:#0f8a4f;--warn:#c76a00;--hl:#fff6cf;--sh:0 1px 2px rgba(0,0,0,.06)}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1220;--card:#18213a;--tx:#eef1f8;--mu:#9aa6c0;--bd:#26314f;--blue:#7b97ee;--onb:#0d1220;--red:#ff7a7a;--ok:#4cd694;--warn:#ffa84d;--hl:#2d2b15;--sh:none}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font:15px/1.5 system-ui,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:env(safe-area-inset-bottom,0px)}
+.flag{height:6px;background:linear-gradient(90deg,var(--blue) 0 34%,var(--yel) 34% 66%,#b10c0c 66%)}
+.wrap{max-width:1180px;margin:auto;padding:0 16px 40px}
+.hero{padding:calc(20px + env(safe-area-inset-top,0px)) 0 6px}
+h1{font-size:clamp(1.8rem,5.5vw,2.8rem);font-weight:850;letter-spacing:-.02em;margin:0;line-height:1.08}
+h1 span{background:linear-gradient(90deg,var(--blue),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{color:var(--mu);margin:4px 0 0}.live{display:flex;align-items:center;gap:8px;color:var(--mu);font-size:.85rem;margin-top:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pu 2s infinite}
+@keyframes pu{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0}
+.st{font:inherit;color:var(--tx);text-align:left;background:var(--card);border:2px solid var(--bd);border-radius:14px;padding:12px 14px;box-shadow:var(--sh);cursor:pointer}
+.st.static{cursor:default}.st.on{border-color:var(--blue)}
+.st b{display:block;font-size:2rem;line-height:1.1;font-weight:800}.st small{color:var(--mu)}
+.st.new b{color:#e11d48}.st.soon b{color:var(--warn)}
+h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin:20px 0 8px}
+.heat{display:flex;gap:3px;overflow-x:auto;padding-bottom:4px}
+.hd{flex:0 0 30px;background:none;border:0;padding:0;cursor:pointer;color:var(--mu);font:inherit;font-size:.68rem;text-align:center}
+.bar{display:flex;align-items:flex-end;height:58px}.bar i{display:block;width:100%;border-radius:5px 5px 0 0;background:var(--bd)}
+.hd.has .bar i{background:var(--blue)}.hd.near.has .bar i{background:var(--warn)}.hd.on .bar i{background:var(--yel)}
+.hd b{display:block;margin-top:2px;color:var(--tx)}.hd.today b{color:var(--red)}.hd small{display:block;min-height:1em}
+.bar2{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0 4px}
+input[type=search]{flex:1;min-width:200px;padding:10px 13px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font:inherit}
+.seg{display:flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.seg button{font:inherit;border:0;background:var(--card);color:var(--tx);padding:9px 14px;cursor:pointer}.seg button.on{background:var(--blue);color:var(--onb)}
+label.ck{font-size:.85rem;color:var(--mu);display:flex;gap:6px;align-items:center}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:inherit;font-size:.82rem;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:99px;padding:5px 12px;cursor:pointer}
+.chip b{opacity:.6;margin-left:4px}.chip.on{background:var(--blue);border-color:var(--blue);color:var(--onb)}
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:20px;align-items:start;margin-top:12px}
+.ln h3{margin:0;font-size:1.05rem;display:flex;gap:8px;align-items:center}.ln h3 span{font-size:.75rem;background:var(--bd);border-radius:99px;padding:0 9px;color:var(--tx)}
+.ln>p{margin:0 0 8px;color:var(--mu);font-size:.8rem}.l-s h3{color:var(--red)}.l-f h3{color:#e11d48}
+.stack .ln{margin-top:18px}.stack{max-width:820px}
+.c{background:var(--card);border:1px solid var(--bd);border-left:5px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:10px;box-shadow:var(--sh)}
+.c.p3{border-left-color:var(--red)}.c.p2{border-left-color:var(--warn)}.c.p1{border-left-color:var(--yel)}.c.fresh{background:var(--hl)}
+.ti{color:var(--tx);font-weight:650;text-decoration:none}.ti:hover{color:var(--blue);text-decoration:underline}
+.en{font-size:.86rem;color:var(--mu);margin:2px 0 6px}
+.mt,.ft{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:.8rem;color:var(--mu)}.ft{margin-top:6px;justify-content:space-between}
+.pill,.nw,.rs{padding:1px 9px;border-radius:99px;font-size:.74rem;font-weight:700}
+.pill.p3{background:var(--red);color:#fff}.pill.p2{background:var(--warn);color:#fff}.pill.p1{background:var(--yel);color:#3a3000}.pill.p0{border:1px solid var(--bd);color:var(--mu)}
+.nw{background:#e11d48;color:#fff}.rs{border:1px solid var(--warn);color:var(--warn)}
+.dl{color:var(--blue);font-weight:700;text-decoration:none;white-space:nowrap}
+.more{width:100%;padding:9px;border:1px dashed var(--bd);background:none;color:var(--mu);border-radius:10px;cursor:pointer;font:inherit}
+.empty{text-align:center;color:var(--mu);padding:50px 10px}.src{display:flex;gap:6px;flex-wrap:wrap;font-size:.78rem}
+.src span{border:1px solid var(--bd);border-radius:99px;padding:2px 10px;background:var(--card)}.src .ok:before{content:"● ";color:var(--ok)}.src .idle:before{content:"● ";color:var(--mu)}.src .bad:before{content:"● ";color:var(--red)}
 </style></head><body>
-<header><h1>Sandile Tender Tracker</h1>
-<div class="sub" id="upd">Loading…</div><div class="sub" id="log"></div>
-<div class="bar"><input id="q" placeholder="Search tenders…">
-<select id="st"><option value="">Open &amp; new</option><option value="new">New (last 3 days)</option><option value="soon">Closing in 7 days</option><option value="expired">Expired</option><option value="all">All</option></select>
-<select id="so"><option value="">All organisations</option></select></div></header>
-<main id="list"></main>
+<div class="flag"></div>
+<div class="wrap">
+<header class="hero"><h1><span>Sandile</span> Tender Tracker</h1>
+<p class="tag">Every open tender from Eswatini’s public portals, on one radar.</p>
+<div class="live"><i class="dot"></i><span id="ago">Scanning…</span></div></header>
+<div class="stats" id="stats"></div>
+<h2>Closing in the next 4 weeks <span style="text-transform:none;letter-spacing:0">(tap a day)</span></h2>
+<div class="heat" id="heat"></div>
+<div class="bar2"><input type="search" id="q" placeholder="Search title, organisation or reference…">
+<div class="seg"><button data-view="board" id="vb">Board</button><button data-view="list" id="vl">List</button></div>
+<label class="ck"><input type="checkbox" id="ex"> Show closed</label></div>
+<div class="chips" id="orgs"></div>
+<main id="main"></main>
+<h2>Source health</h2><div class="src" id="src"></div>
+</div>
 <script>
-const $=id=>document.getElementById(id);let T=[];
+const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const days=d=>d?Math.ceil((new Date(d)-new Date().setHours(0,0,0,0))/864e5):null;
-const NEW_DAYS=3;   // a tender counts as NEW for this many days (today + the previous days)
-const dayAge=t=>{const a=new Date(t.first_seen),n=new Date();
-  return Math.round((new Date(n.getFullYear(),n.getMonth(),n.getDate())-new Date(a.getFullYear(),a.getMonth(),a.getDate()))/864e5)};
+let T=[],UPD=null,LOG=[];
+const S={q:'',org:'',mode:'all',day:'',exp:false,view:'board',open:{}};
+const NEW_DAYS=3,CAP=6;   // NEW_DAYS: how long a tender counts as new; CAP: cards shown per lane before "show more"
+const sod=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const org=t=>t.entity||t.source;
+const dleft=t=>t.closing?Math.round((new Date(t.closing+'T00:00:00')-sod(new Date()))/864e5):null;
+const dayAge=t=>Math.round((sod(new Date())-sod(new Date(t.first_seen)))/864e5);
 const isFresh=t=>t.status==='open'&&dayAge(t)<NEW_DAYS;
 const freshLabel=t=>{const d=dayAge(t);return d<=0?'NEW today':d===1?'NEW yesterday':'NEW '+d+' days ago'};
-function render(){
-  const q=$('q').value.toLowerCase(),st=$('st').value,so=$('so').value;
-  const r=T.filter(t=>(!q||(t.title+' '+(t.entity||'')+' '+(t.reference||'')).toLowerCase().includes(q))&&((!so||(t.entity||t.source)===so))&&(
-    st==='all'||(st==='new'&&isFresh(t))||(st==='expired'&&t.status==='expired')||
-    (st==='soon'&&t.closing&&days(t.closing)>=0&&days(t.closing)<=7)||(st===''&&['open'].includes(t.status))))
-   .sort((a,b)=>{const fa=isFresh(a),fb=isFresh(b);
-     if(fa!==fb)return fa?-1:1;
-     if(fa&&fb&&dayAge(a)!==dayAge(b))return dayAge(a)-dayAge(b);
-     return (a.closing||'9999').localeCompare(b.closing||'9999')});
-  $('list').innerHTML=r.length?r.map(t=>{const d=days(t.closing);
-   return `<div class="card${isFresh(t)?' fresh':''}"><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a>
-   ${t.entity?`<div class="ent">${esc(t.entity)}</div>`:''}
-   <div class="meta">${isFresh(t)?`<span class="tag n">${freshLabel(t)}</span>`:''}${d!==null&&d>=0&&d<=7?`<span class="tag s">closes in ${d}d</span>`:''}
-   ${t.type&&/restricted/i.test(t.type)?'<span class="tag s">Restricted – invited suppliers</span>':''}${t.reference?`<span>Ref: ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}
-   <span>${t.closing_text?'Closes: '+esc(t.closing_text):(t.closing?'Closes '+esc(t.closing):'Deadline: see notice'+(t.posted?' (posted '+esc(t.posted)+')':''))}</span>
-   <a class="dl" href="${esc(t.url)}" target="_blank" rel="noopener">Download ↗</a></div></div>`}).join('')
-   :'<p class="sub">No tenders match.</p>';
-}
-let UPD=null,OPEN=0,NEWC=0;
-const ago=d=>{const m=Math.floor((Date.now()-d)/6e4);
-  if(m<1)return 'just now';if(m<60)return m+' min ago';
-  const hr=Math.floor(m/60);if(hr<24)return hr+' h '+(m%60)+' min ago';
-  return Math.floor(hr/24)+' days ago'};
-function tick(){if(!UPD)return;
-  $('upd').textContent=`${OPEN} open · ${NEWC} new · last checked ${ago(UPD)}`;
-  $('upd').title=UPD.toLocaleString()}
-function load(first){
-  return fetch('tenders.json?'+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
-    const changed=!UPD||new Date(j.updated)-UPD!==0;
-    T=Object.values(j.tenders);OPEN=T.filter(t=>t.status==='open').length;NEWC=T.filter(isFresh).length;UPD=new Date(j.updated);tick();
-    $('log').textContent='Sources checked: '+(j.log||[]).join(' · ');
-    if(changed){const cur=$('so').value;$('so').length=1;
-      [...new Set(T.map(t=>t.entity||t.source))].sort().forEach(s=>$('so').add(new Option(s,s)));
-      $('so').value=cur;render();}
-  }).catch(()=>{if(first)$('upd').textContent='No data yet — run scraper.py to create tenders.json';});
-}
+const live=()=>T.filter(t=>t.status==='open');
+const soon=t=>{const d=dleft(t);return d!==null&&d>=0&&d<=7};
+function pill(t){const d=dleft(t);
+  if(d===null)return['see notice','p0'];if(d<0)return['closed','p0'];
+  if(d===0)return['closes today','p3'];if(d===1)return['tomorrow','p3'];
+  return[d+' days',d<=3?'p3':d<=7?'p2':d<=30?'p1':'p0']}
+function match(t){
+  if(S.q&&!(t.title+' '+org(t)+' '+(t.reference||'')).toLowerCase().includes(S.q))return false;
+  if(S.org&&org(t)!==S.org)return false;
+  if(S.mode==='new'&&!isFresh(t))return false;
+  if(S.mode==='soon'&&!soon(t))return false;
+  if(S.day&&t.closing!==S.day)return false;return true}
+function card(t){const[p,pc]=pill(t),f=isFresh(t),r=/restricted/i.test(t.type||'');
+  const when=t.closing_text?'Closes '+t.closing_text:t.closing?'Closes '+t.closing:'Deadline in notice'+(t.posted?' · posted '+t.posted:'');
+  return `<article class="c ${pc}${f?' fresh':''}"><a class="ti" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a>
+  <div class="en">${esc(org(t))}</div><div class="mt"><span class="pill ${pc}">${p}</span>${f?`<span class="nw">${freshLabel(t)}</span>`:''}${r?'<span class="rs">Restricted: invited suppliers</span>':''}${t.reference?`<span>Ref ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}</div>
+  <div class="ft"><span>${esc(when)}</span><a class="dl" href="${esc(t.url)}" target="_blank" rel="noopener">Download ↗</a></div></article>`}
+const LANES=[['s','Closing this week','7 days or less. Move fast.'],['f','Just landed','Spotted in the last '+NEW_DAYS+' days'],['m','Next 30 days',''],['l','Later','More than a month away'],['n','Check the notice','No deadline on the listing'],['x','Recently closed','']];
+const laneOf=t=>{const d=dleft(t);if(d===null)return 'n';if(d<0)return 'x';if(d<=7)return 's';if(isFresh(t))return 'f';return d<=30?'m':'l'};
+const byClose=(a,b)=>(a.closing||'9999').localeCompare(b.closing||'9999');
+function stats(){const L=live(),n=[['all',L.length,'Open tenders',''],['new',L.filter(isFresh).length,'New in '+NEW_DAYS+' days','new'],['soon',L.filter(soon).length,'Closing this week','soon']];
+  return n.map(([m,v,l,c])=>`<button class="st ${c}${S.mode===m?' on':''}" data-mode="${m}"><b>${v}</b><small>${l}</small></button>`).join('')+
+  `<div class="st static"><b>${new Set(L.map(org)).size}</b><small>Organisations</small></div>`}
+function heat(){const base=sod(new Date()),cnt={};live().forEach(t=>{if(t.closing)cnt[t.closing]=(cnt[t.closing]||0)+1});
+  let h='';for(let i=0;i<28;i++){const d=new Date(base);d.setDate(base.getDate()+i);const k=iso(d),n=cnt[k]||0;
+    h+=`<button class="hd${n?' has':''}${i<=7?' near':''}${i===0?' today':''}${S.day===k?' on':''}" data-day="${k}" title="${n} closing on ${k}"><span class="bar"><i style="height:${n?Math.min(100,22+n*26):6}%"></i></span><b>${d.getDate()}</b><small>${i===0||d.getDate()===1?d.toLocaleString('en',{month:'short'}):''}</small></button>`}
+  return h}
+function orgs(){const c={};live().forEach(t=>c[org(t)]=(c[org(t)]||0)+1);
+  return `<button class="chip${S.org?'':' on'}" data-org="">All</button>`+Object.entries(c).sort((a,b)=>b[1]-a[1]).map(([o,n])=>`<button class="chip${S.org===o?' on':''}" data-org="${esc(o)}">${esc(o)}<b>${n}</b></button>`).join('')}
+function main(){
+  const r=T.filter(t=>(t.status==='open'||(S.exp&&t.status==='expired'))&&match(t));
+  const day=S.day?`<p><button class="chip on" data-day="${S.day}">Closing on ${S.day} ✕</button></p>`:'';
+  if(!r.length)return day+'<div class="empty"><h3>Nothing here, yet.</h3>The radar checks again every couple of hours. Try clearing a filter.</div>';
+  const g={};r.forEach(t=>(g[laneOf(t)]=g[laneOf(t)]||[]).push(t));
+  const html=LANES.filter(([k])=>g[k]).map(([k,title,sub])=>{
+    const a=g[k].sort(k==='f'?(x,y)=>dayAge(x)-dayAge(y)||byClose(x,y):k==='n'?(x,y)=>y.first_seen.localeCompare(x.first_seen):byClose);
+    const shown=S.open[k]?a:a.slice(0,CAP);
+    return `<section class="ln l-${k}"><h3>${title}<span>${a.length}</span></h3>${sub?`<p>${sub}</p>`:'<p></p>'}${shown.map(card).join('')}${a.length>shown.length?`<button class="more" data-more="${k}">Show ${a.length-shown.length} more</button>`:''}</section>`}).join('');
+  return day+`<div class="${S.view==='list'?'stack':'board'}">${html}</div>`}
+function srcs(){return LOG.map(l=>{const i=l.indexOf(': '),n=l.slice(0,i),r=l.slice(i+2);
+  return `<span class="${/FAILED/.test(r)?'bad':/no tenders/.test(r)?'idle':'ok'}">${esc(n)} · ${/FAILED/.test(r)?'could not load':/no tenders/.test(r)?'none listed':esc(r.replace(' tenders',''))}</span>`}).join('')}
+function render(){$('stats').innerHTML=stats();$('heat').innerHTML=heat();$('orgs').innerHTML=orgs();$('main').innerHTML=main();$('src').innerHTML=srcs();
+  $('vb').className=S.view==='board'?'on':'';$('vl').className=S.view==='list'?'on':''}
+const ago=d=>{const m=Math.floor((Date.now()-d)/6e4);if(m<1)return 'just now';if(m<60)return m+' min ago';const h=Math.floor(m/60);return h<24?h+' h '+(m%60)+' min ago':Math.floor(h/24)+' days ago'};
+function tick(){if(!UPD)return;$('ago').textContent='Radar last swept '+ago(UPD);$('ago').title=UPD.toLocaleString()}
+function load(first){return fetch('tenders.json?'+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
+  T=Object.values(j.tenders);LOG=j.log||[];UPD=new Date(j.updated);tick();render();
+}).catch(()=>{if(first)$('ago').textContent='No data yet. Run scraper.py to create tenders.json'})}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-mode],[data-org],[data-day],[data-view],[data-more]');if(!b)return;const d=b.dataset;
+  if('mode' in d)S.mode=S.mode===d.mode?'all':d.mode;if('org' in d)S.org=d.org;if('day' in d)S.day=S.day===d.day?'':d.day;
+  if('view' in d)S.view=d.view;if('more' in d)S.open[d.more]=true;render()});
+$('q').addEventListener('input',e=>{S.q=e.target.value.toLowerCase();render()});
+$('ex').addEventListener('change',e=>{S.exp=e.target.checked;render()});
 load(true);setInterval(tick,30000);setInterval(load,300000);
-['input','change'].forEach(e=>document.addEventListener(e,render));
 </script></body></html>
