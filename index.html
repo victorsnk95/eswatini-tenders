@@ -2,6 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sandile Tender Tracker</title>
+<meta name="theme-color" content="#3e5eb9"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f3f1ea;--card:#fff;--tx:#14181f;--mu:#5d6675;--bd:#e3dfd3;--blue:#3e5eb9;--onb:#fff;--yel:#ffd900;--red:#b10c0c;--ok:#0f8a4f;--warn:#c76a00;--hl:#fff6cf;--sh:0 1px 2px rgba(0,0,0,.06)}
@@ -146,6 +147,13 @@ html,body{background:#fff!important;color:#000!important}body>*:not(#prs){displa
 .stp{display:inline-block;border-radius:99px;padding:1px 8px;font-size:.72rem;font-weight:700;color:#fff;print-color-adjust:exact;-webkit-print-color-adjust:exact}.stp.s-drop{text-decoration:none;color:#444!important;background:#ddd}
 .ppg{height:6px;border:1px solid #999;border-radius:4px;overflow:hidden;margin-bottom:2px}.ppg i{display:block;height:100%;background:#3e5eb9;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr.sm{font-size:9.5px}.pr.xs{font-size:8px}.prf{margin-top:8px;font-size:.72rem;color:#666}}
+
+.brief{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px 16px;margin:12px 0}.brief summary{cursor:pointer;font-weight:700}.brief ul{margin:8px 0 10px;padding-left:20px}.brief li{margin:3px 0}.brief a.chip{text-decoration:none;display:inline-block}
+.pks{margin:8px 0 18px;padding:12px 14px;border-radius:16px;border:1px solid var(--bd);background:linear-gradient(120deg,color-mix(in srgb,var(--blue) 12%,var(--card)),color-mix(in srgb,#a855f7 12%,var(--card)))}.pks small{color:var(--mu);font-weight:400}.empty1{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pkr{display:flex;gap:10px;overflow-x:auto;padding:10px 2px 4px}.pk{flex:0 0 235px;position:relative;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;cursor:pointer;transition:transform .15s}.pk:hover{transform:translateY(-2px)}
+.pk .mp{position:absolute;top:8px;right:8px;font-size:.72rem;font-weight:800;color:#fff;background:linear-gradient(90deg,#7c3aed,#c026d3);border-radius:99px;padding:1px 8px}.pkt{font-weight:650;font-size:.88rem;padding-right:46px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.pk small{display:block;color:var(--mu)}.pk .why{color:#a855f7;margin-top:4px}
+.prept{margin:10px 0;padding:8px 11px;border-radius:10px;font-size:.84rem}.prept.ok{background:color-mix(in srgb,var(--ok) 16%,transparent)}.prept.bad{background:color-mix(in srgb,var(--red) 16%,transparent)}
+.rs.tgt,.rs.chgt{border-color:var(--red);color:var(--red)}.mu{color:var(--mu);font-size:.78rem}.gd{display:block}.gd p{margin:10px 0;font-size:.92rem}
 </style></head><body>
 <div class="flag"></div>
 <div class="wrap">
@@ -155,12 +163,14 @@ html,body{background:#fff!important;color:#000!important}body>*:not(#prs){displa
 <div id="spot"></div>
 <div id="tick"></div>
 <div class="stats" id="stats"></div>
+<div id="brief"></div>
 <h2>Closing in the next 4 weeks <span style="text-transform:none;letter-spacing:0">(tap a day)</span></h2>
 <div class="heat" id="heat"></div>
 <div class="bar2"><input type="search" id="q" placeholder="Search title, organisation or reference…">
 <div class="seg"><button data-view="board">Board</button><button data-view="list">List</button><button data-view="cal">Calendar</button><button data-view="ins">Insights</button></div>
 <button class="kb" data-wsopen="1" title="Open your tender workspace">🗓️ Workspace</button>
 <button class="kb" data-pal="1" title="Command palette (Ctrl+K)">⌕ Ctrl K</button>
+<button class="kb" data-csv="1" title="Download the current list as a spreadsheet">⬇ CSV</button><button class="kb" data-guide="1" title="How to use this site">?</button>
 <label class="ck"><input type="checkbox" id="ex"> Show closed</label></div>
 <input id="wt" placeholder="🎯 Watchlist: keywords to highlight, comma separated (e.g. solar, roads, laptops)">
 <div class="chips" id="orgs"></div>
@@ -184,9 +194,12 @@ const CATS=[['Construction','🏗️',/construct|build|road|rehabilit|upgrad|ref
 const catOf=t=>CATS.find(c=>c[2].test(t.title))[0],catIcon=t=>CATS.find(c=>c[2].test(t.title))[1];
 const watched=t=>WATCH.length&&WATCH.some(w=>(t.title+' '+org(t)).toLowerCase().includes(w));
 function ics(id){const t=T.find(x=>x.id===id);if(!t||!t.closing)return;
-  const e=s=>String(s).replace(/[\\,;]/g,m=>'\\'+m).replace(/\n/g,'\\n'),d=t.closing.replace(/-/g,'');
-  const body=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Sandile Tender Tracker//EN','BEGIN:VEVENT','UID:'+t.id+'@sandile-tenders','DTSTAMP:'+new Date().toISOString().replace(/[-:]|\.\d+/g,''),'DTSTART;VALUE=DATE:'+d,'SUMMARY:'+e('Tender closes: '+t.title),'DESCRIPTION:'+e(org(t)+(t.reference?' | Ref '+t.reference:'')+' | '+t.url),'BEGIN:VALARM','TRIGGER:-P2D','ACTION:DISPLAY','DESCRIPTION:Tender closes in 2 days','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([body],{type:'text/calendar'}));a.download='tender-closing-'+d+'.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+  const e=s=>String(s).replace(/[\\,;]/g,m=>'\\'+m).replace(/\n/g,'\\n'),z=s=>s.replace(/-/g,'');
+  const ev=(k,date,sum,desc,al)=>['BEGIN:VEVENT','UID:'+t.id+k+'@sandile-tenders','DTSTAMP:'+new Date().toISOString().replace(/[-:]|\.\d+/g,''),'DTSTART;VALUE=DATE:'+z(date),'SUMMARY:'+e(sum),'DESCRIPTION:'+e(desc),'BEGIN:VALARM','TRIGGER:-P'+al+'D','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM','END:VEVENT'];
+  const info=org(t)+(t.reference?' | Ref '+t.reference:'')+' | '+t.url;
+  let L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Sandile Tender Tracker//EN',...ev('c',t.closing,'Tender closes: '+t.title,info,2)];
+  const sv=t.intel&&t.intel.site_visit;if(sv&&sv>=iso(new Date()))L=L.concat(ev('s',sv,'Site visit or briefing: '+t.title,info,1));
+  L.push('END:VCALENDAR');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar'}));a.download='tender-'+z(t.closing)+'.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
 function copyList(b){const txt=T.filter(t=>SAVED.has(t.id)).sort(byClose).map(t=>`• ${t.title} | ${org(t)} | ${t.closing_text||t.closing||'see notice'}\n  ${t.url}`).join('\n');
   const done=()=>{toast('📋 Shortlist copied');b.textContent='✓ Copied';setTimeout(()=>b.textContent='📋 Copy shortlist',1800)};
   try{navigator.clipboard.writeText(txt).then(done)}catch{}}
@@ -217,7 +230,7 @@ function match(t){
 function card(t,i){const[p,pc]=pill(t),f=isFresh(t),r=/restricted/i.test(t.type||''),w=watched(t);
   const when=t.closing_text?'Closes '+t.closing_text:t.closing?'Closes '+t.closing:'Deadline in notice'+(t.posted?' · posted '+t.posted:'');
   return `<article data-id="${esc(t.id)}" class="c ${pc}${f?' fresh':''}${w?' watch':''}" style="--i:${Math.min(i||0,10)}"><div class="hd2"><a class="ti" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a><button class="sv${SAVED.has(t.id)?' on':''}" data-save="${esc(t.id)}" aria-label="Save tender" title="${SAVED.has(t.id)?'Remove from saved':'Save this tender'}">★</button></div>
-  <div class="en">${esc(org(t))} · ${catIcon(t)} ${catOf(t)}</div><div class="mt"><span class="pill ${pc}">${p}</span>${f?`<span class="nw">${freshLabel(t)}</span>`:''}${w?'<span class="mch">🎯 Watch match</span>':''}${r?'<span class="rs">Restricted: invited suppliers</span>':''}${t.status==='removed'?'<span class="rs">No longer listed</span>':''}${t.reference?`<span>Ref ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}</div>
+  <div class="en">${esc(org(t))} · ${catIcon(t)} ${catOf(t)}</div><div class="mt"><span class="pill ${pc}">${p}</span>${f?`<span class="nw">${freshLabel(t)}</span>`:''}${w?'<span class="mch">🎯 Watch match</span>':''}${r?'<span class="rs">Restricted: invited suppliers</span>':''}${chTag(t)}${svTag(t)}${tightTag(t)}${t.status==='removed'?'<span class="rs">No longer listed</span>':''}${t.reference?`<span>Ref ${esc(t.reference)}</span>`:''}${t.method?`<span>${esc(t.method)}</span>`:''}</div>
   <div class="ft"><span>${esc(when)}</span><span>${t.closing&&dleft(t)>=0?`<button class="ic" data-ics="${esc(t.id)}" title="Add the closing date to your calendar, with a 2-day reminder">📅 Remind me</button>`:''}<a class="dl" href="${esc(t.url)}" target="_blank" rel="noopener">Download ↗</a></span></div></article>`}
 const LANES=[['s','Closing this week','7 days or less. Move fast.'],['f','Just landed','Spotted in the last '+NEW_DAYS+' days'],['m','Next 30 days',''],['l','Later','More than a month away'],['n','Check the notice','No deadline on the listing'],['x','Recently closed','']];
 const laneOf=t=>{const d=dleft(t);if(d===null)return 'n';if(d<0)return 'x';if(d<=7)return 's';if(isFresh(t))return 'f';return d<=30?'m':'l'};
@@ -246,24 +259,24 @@ function main(){
     const a=g[k].sort(k==='f'?(x,y)=>dayAge(x)-dayAge(y)||byClose(x,y):k==='n'?(x,y)=>y.first_seen.localeCompare(x.first_seen):byClose);
     const shown=S.open[k]?a:a.slice(0,CAP);
     return `<section class="ln l-${k}"><h3>${title}<span>${a.length}</span></h3>${sub?`<p>${sub}</p>`:'<p></p>'}${shown.map((t,i)=>card(t,i)).join('')}${a.length>shown.length?`<button class="more" data-more="${k}">Show ${a.length-shown.length} more</button>`:''}</section>`}).join('');
-  return cp+day+`<div class="${S.view==='list'?'stack':'board'}">${html}</div>`}
+  return picksH()+cp+day+`<div class="${S.view==='list'?'stack':'board'}">${html}</div>`}
 function srcs(){return LOG.map(l=>{const i=l.indexOf(': '),n=l.slice(0,i),r=l.slice(i+2);
   return `<span class="${/FAILED/.test(r)?'bad':/no tenders/.test(r)?'idle':'ok'}">${esc(n)} · ${/FAILED/.test(r)?'could not load':/no tenders/.test(r)?'none listed':esc(r.replace(' tenders',''))}</span>`}).join('')}
 function render(quiet){document.body.classList.toggle('noanim',!!quiet);
-  $('stats').innerHTML=stats();$('spot').innerHTML=spot();spotTick();$('tick').innerHTML=ticker();$('heat').innerHTML=heat();$('orgs').innerHTML=orgs();$('cats').innerHTML=cats();$('main').innerHTML=S.view==='cal'?calendar():S.view==='ins'?insights():main();$('src').innerHTML=srcs();
+  $('stats').innerHTML=stats();$('brief').innerHTML=briefing();$('spot').innerHTML=spot();spotTick();$('tick').innerHTML=ticker();$('heat').innerHTML=heat();$('orgs').innerHTML=orgs();$('cats').innerHTML=cats();$('main').innerHTML=S.view==='cal'?calendar():S.view==='ins'?insights():main();$('src').innerHTML=srcs();
   document.querySelectorAll('.seg button').forEach(b=>b.className=b.dataset.view===S.view?'on':'');countUp()}
 const ago=d=>{const m=Math.floor((Date.now()-d)/6e4);if(m<1)return 'just now';if(m<60)return m+' min ago';const h=Math.floor(m/60);return h<24?h+' h '+(m%60)+' min ago':Math.floor(h/24)+' days ago'};
-function tick(){if(!UPD)return;$('ago').textContent='Radar last swept '+ago(UPD)+(SINCE?` · ${SINCE} new since your last visit`:'');$('ago').title=UPD.toLocaleString()}
+function tick(){if(!UPD)return;$('ago').textContent='Radar last swept '+ago(UPD)+(SINCE?` · ${SINCE} new since your last visit`:'')+(navigator.onLine===false?' · offline: showing the last saved data':'');$('ago').title=UPD.toLocaleString()}
 function load(first){return fetch('tenders.json?'+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
-  T=Object.values(j.tenders);LOG=j.log||[];UPD=new Date(j.updated);if(first){SINCE=LAST?live().filter(t=>new Date(t.first_seen)>LAST).length:0;ST.set('lastVisit',Date.now())}tick();render(!first);
+  T=Object.values(j.tenders);LOG=j.log||[];UPD=new Date(j.updated);if(first){SINCE=LAST?live().filter(t=>new Date(t.first_seen)>LAST).length:0;ST.set('lastVisit',Date.now())}tick();render(!first);if(first&&!ST.get('seenGuide',0)){ST.set('seenGuide',1);setTimeout(openGuide,900)}
 }).catch(()=>{if(first)$('ago').textContent='No data yet. Run scraper.py to create tenders.json'})}
 document.addEventListener('click',e=>{const X=e.target;
   if(X.id==='pl'){closePal();return}
   const pi=X.closest('[data-pi]');if(pi){palRun(+pi.dataset.pi);return}
-  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm],[data-wsopen],[data-print]');
+  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm],[data-wsopen],[data-print],[data-csv],[data-guide]');
   if(!b){const k=X.closest('[data-id]');if(k&&!X.closest('a'))openDr(k.dataset.id);return}
   const d=b.dataset;
-  if('wsopen' in d){openWs();return}if('print' in d){printSummary();return}if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
+  if('wsopen' in d){openWs();return}if('print' in d){printSummary();return}if('csv' in d){exportCsv();return}if('guide' in d){openGuide();return}if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
   if('save' in d){SAVED.has(d.save)?SAVED.delete(d.save):SAVED.add(d.save);ST.set('saved',[...SAVED]);toast(SAVED.has(d.save)?'★ Saved to your shortlist':'Removed from your shortlist');render(true);
     const el=document.querySelector('.sv.on[data-save="'+d.save+'"]');if(el)el.classList.add('pop');if(DR)openDr(DR);return}
   if('ics' in d){ics(d.ics);toast('📅 Reminder downloaded: open it to add to your calendar');return}
@@ -298,8 +311,8 @@ function ring(t){const d=dleft(t),c=2*Math.PI*52,pr=d===null?0:Math.max(0,Math.m
 function openDr(id){const t=T.find(x=>x.id===id);if(!t)return;DR=id;
   const sim=T.filter(x=>x.id!==id&&x.status==='open'&&(org(x)===org(t)||catOf(x)===catOf(t))).sort(byClose).slice(0,4),row=(k,v)=>v?`<dt>${k}</dt><dd>${esc(v)}</dd>`:'';
   $('dr').innerHTML=`<button class="x" data-close="1" aria-label="Close">✕</button><div class="ring">${ring(t)}</div><h3>${esc(t.title)}</h3><p class="en">${esc(org(t))} · ${catIcon(t)} ${catOf(t)}</p>
-  <div class="acts"><a class="btn pri" href="${esc(t.url)}" target="_blank" rel="noopener">Open original ↗</a><button class="btn" data-save="${esc(t.id)}">${SAVED.has(t.id)?'★ Saved':'☆ Save'}</button>${t.closing&&dleft(t)>=0?`<button class="btn" data-ics="${esc(t.id)}">📅 Remind me</button>`:''}<button class="btn" data-share="${esc(t.id)}">🔗 Share</button></div>
-  <dl>${row('Closes',t.closing_text||t.closing)}${row('Reference',t.reference)}${row('Method',t.method)}${row('Type',t.type)}${row('First spotted',t.first_seen?new Date(t.first_seen).toDateString():'')}${row('Posted',t.posted)}${row('Source',t.source)}</dl>
+  <div class="acts"><a class="btn pri" href="${esc(t.url)}" target="_blank" rel="noopener">Open original ↗</a><button class="btn" data-save="${esc(t.id)}">${SAVED.has(t.id)?'★ Saved':'☆ Save'}</button>${t.closing&&dleft(t)>=0?`<button class="btn" data-ics="${esc(t.id)}">📅 Remind me</button>`:''}<button class="btn" data-share="${esc(t.id)}">🔗 Share</button><a class="btn" target="_blank" rel="noopener" href="${waLink(t)}">💬 WhatsApp</a></div>
+  <dl>${row('Closes',t.closing_text||t.closing)}${row('Reference',t.reference)}${row('Method',t.method)}${row('Type',t.type)}${row('First spotted',t.first_seen?new Date(t.first_seen).toDateString():'')}${row('Posted',t.posted)}${row('Source',t.source)}</dl>${intelH(t)}
   ${sim.length?`<h4>Similar tenders</h4>${sim.map(x=>`<div class="sim" data-id="${esc(x.id)}">${esc(x.title)}<small>${esc(org(x))} · ${pill(x)[0]}</small></div>`).join('')}`:''}`;
   $('dr').classList.add('on');$('sc').classList.add('on');$('dr').scrollTop=0}
 function closeDr(){DR=null;$('dr').classList.remove('on');$('sc').classList.remove('on')}
@@ -323,7 +336,7 @@ function insights(){const L=live(),cc={},oc={};L.forEach(t=>{cc[catOf(t)]=(cc[ca
 function openPal(){$('pl').classList.add('on');$('pq').value='';PI=0;palRender();$('pq').focus()}
 function closePal(){$('pl').classList.remove('on')}
 function palRender(){const q=$('pq').value.toLowerCase().trim(),has=s=>!q||s.toLowerCase().includes(q),L=[];
-  [['🗓️','Open my tender workspace',()=>openWs()],['🖨️','Print my tender summary',()=>printSummary()],['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
+  [['🗓️','Open my tender workspace',()=>openWs()],['🖨️','Print my tender summary',()=>printSummary()],['⬇','Download this list as CSV',()=>exportCsv()],['📲','Install as an app',()=>installApp()],['❓','How to use this site',()=>openGuide()],['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
   if(q){[...new Set(live().map(org))].filter(has).slice(0,4).forEach(o=>L.push({i:'🏢',t:o,s:'Filter by organisation',run:()=>{S.org=o;if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     CATS.filter(c=>c[0]!=='Other'&&has(c[0])).slice(0,3).forEach(c=>L.push({i:c[1],t:c[0],s:'Filter by type',run:()=>{S.cat=c[0];if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     live().filter(t=>has(t.title+' '+org(t)+' '+(t.reference||''))).slice(0,8).forEach(t=>L.push({i:'📄',t:t.title,s:org(t)+' · '+pill(t)[0],run:()=>openDr(t.id),keep:1}))}
@@ -348,7 +361,7 @@ function closeWs(){$('ws').classList.remove('on');document.body.classList.remove
 function wsDetail(t){const w=WORK[t.id]||{st:'todo',chk:[],note:''},p=wprog(t.id),s=wstat(t),d=dleft(t);
   const state=s==='sub'?`Submitted${w.sub?' on '+w.sub:''} ✓`:s==='miss'?'Deadline passed, not submitted':s==='drop'?'Not bidding':d===null?'See notice for the deadline':d===0?'Closes today':`${d} day${d===1?'':'s'} left`;
   return `<div class="wdt"><h3>${esc(t.title)}</h3><p class="en">${esc(org(t))} · ${esc(t.closing_text||t.closing||'deadline in notice')}</p>
-  <div class="stg">${STG.map(([k,l])=>`<button class="${w.st===k?'on':''}" data-wsst="${k}">${l}</button>`).join('')}</div>
+  ${chAlert(t)}${prepH(t)}<div class="stg">${STG.map(([k,l])=>`<button class="${w.st===k?'on':''}" data-wsst="${k}">${l}</button>`).join('')}</div>
   <div class="pg big"><i style="width:${p}%"></i></div><small>${p}% complete · <b>${state}</b></small>
   <ul class="chk">${CHK.map((c,i)=>`<li><label><input type="checkbox" data-wsck="${i}" ${w.chk[i]?'checked':''}>${c}</label></li>`).join('')}</ul>
   <textarea id="wsn" placeholder="Notes: contacts, prices, things to remember…">${esc(w.note||'')}</textarea>
@@ -384,5 +397,68 @@ function buildPrs(){const L=mine().sort((a,b)=>rk(a)-rk(b)||byClose(a,b)),n=L.le
   <p class="prf">Verify every detail on the original tender notice before submitting. Printed from your Tender Tracker.</p></div>`}
 function printSummary(){buildPrs();window.print()}
 window.addEventListener('beforeprint',buildPrs);
+
+// ===== deadline changes, tender X-ray, prep-time check
+const fmtD=s=>{try{return new Date(s+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'})}catch{return s}};
+const recentChg=t=>(t.changes||[]).filter(c=>c.field==='closing'&&Date.now()-new Date(c.at)<14*864e5).slice(-1)[0];
+const chTag=t=>{const c=recentChg(t);return c?`<span class="rs chgt" title="Closing date moved from ${esc(fmtD(c.from))} to ${esc(fmtD(c.to))}">⚠️ Deadline changed</span>`:''};
+const chAlert=t=>{const c=recentChg(t);return c?`<p class="prept bad">⚠️ Deadline changed on ${esc(c.at.slice(0,10))}: ${esc(fmtD(c.from))} → ${esc(fmtD(c.to))}. Check the notice for an addendum.</p>`:''};
+const svDate=t=>t.intel&&t.intel.site_visit&&t.intel.site_visit>=iso(new Date())?t.intel.site_visit:null;
+const svTag=t=>svDate(t)?`<span class="rs" title="Detected in the tender document">📍 Site visit ${esc(fmtD(svDate(t)))}</span>`:'';
+function need(t){const x=(t.title+' '+(t.type||'')+' '+(t.method||'')).toLowerCase();return /proposal|consult|expression|eoi|feasib|design/.test(x)?10:/construct|rehabilit|upgrad|install|works|road|refurb/.test(x)?14:7}
+const tightTag=t=>{const d=dleft(t);return SAVED.has(t.id)&&d!==null&&d>=0&&d<need(t)&&!['sub','drop'].includes((WORK[t.id]||{}).st)?`<span class="rs tgt" title="Typical preparation time is about ${need(t)} days">⏱ Tight: ${d}d left</span>`:''};
+function prepH(t){const d=dleft(t);if(d===null||d<0)return '';const n=need(t),ok=d>=n;return `<p class="prept ${ok?'ok':'bad'}">⏱ ${ok?'Comfortable':'Tight'}: about ${n} days is typical for this kind of bid, and you have ${d}. <span class="mu">(estimate)</span></p>`}
+function intelH(t){const i=t.intel||{},hist=(t.changes||[]).filter(c=>c.field==='closing');
+  const rws=[['Deadline in document',i.closing&&fmtD(i.closing)],['Site visit / briefing',i.site_visit&&fmtD(i.site_visit)],['Bid security',i.security],['Document fee',i.fee]].filter(r=>r[1]);
+  return (rws.length?`<h4>📄 Tender X-ray</h4><dl>${rws.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><span class="mu">Auto-detected from the tender PDF. Always confirm in the original.</span>`:'')
+   +(hist.length?`<h4>Deadline history</h4><dl>${hist.map(c=>`<dt>${esc(c.at.slice(0,10))}</dt><dd>${esc(fmtD(c.from))} → ${esc(fmtD(c.to))}</dd>`).join('')}</dl>`:'')+prepH(t)}
+const waLink=t=>'https://wa.me/?text='+encodeURIComponent(`${t.title}\n${org(t)}\nCloses: ${t.closing_text||t.closing||'see notice'}\n${t.url}`);
+
+// ===== Picked for you: learns from your stars, progress and watchlist
+const STOP=new Set('the and for with from that this tender request proposal supply delivery provision services service installation works national eswatini kingdom'.split(' '));
+const words=t=>(t.title.toLowerCase().match(/[a-z]{4,}/g)||[]).filter(w=>!STOP.has(w));
+function picks(){const sv=mine();if(!sv.length&&!WATCH.length)return [];const cw={},ow={},ww={};
+  sv.forEach(t=>{const g=1+(['prep','ready','sub'].includes((WORK[t.id]||{}).st)?1:0);cw[catOf(t)]=(cw[catOf(t)]||0)+g;ow[org(t)]=(ow[org(t)]||0)+g;words(t).forEach(w=>ww[w]=(ww[w]||0)+g)});
+  const mc=Math.max(1,...Object.values(cw)),mo=Math.max(1,...Object.values(ow));
+  return live().filter(t=>!SAVED.has(t.id)&&(dleft(t)===null||dleft(t)>=1)).map(t=>{const why=[];let s=0;
+    const c=cw[catOf(t)];if(c){s+=40*c/mc;why.push(`You saved ${c} ${catOf(t)} tender${c>1?'s':''}`)}
+    const o=ow[org(t)];if(o){s+=20*o/mo;why.push(`You follow ${org(t)}`)}
+    const kw=words(t).filter(w=>ww[w]);if(kw.length){s+=Math.min(20,kw.length*8);why.push('Similar words: '+kw.slice(0,2).join(', '))}
+    const wm=WATCH.find(w=>(t.title+' '+org(t)).toLowerCase().includes(w));if(wm){s+=30;why.unshift('🎯 Matches “'+wm+'”')}
+    if(isFresh(t))s+=8;const d=dleft(t);if(d!==null&&d<4)s-=10;
+    return {t,s:Math.max(0,Math.min(99,Math.round(s))),why}}).filter(x=>x.s>=25).sort((a,b)=>b.s-a.s).slice(0,6)}
+function picksH(){if(S.mode!=='all'||S.q||S.org||S.cat||S.day)return '';const p=picks();
+  if(!p.length)return `<div class="pks empty1"><b>✨ Picked for you</b><small>Star a few tenders or add watchlist keywords, and I’ll learn what suits you.</small></div>`;
+  return `<div class="pks"><b>✨ Picked for you <small>learned from your stars and watchlist</small></b><div class="pkr">${p.map(x=>`<div class="pk" data-id="${esc(x.t.id)}"><span class="mp">${x.s}%</span><div class="pkt">${esc(x.t.title)}</div><small>${esc(org(x.t))}</small><small class="why">${esc(x.why.slice(0,2).join(' · '))}</small></div>`).join('')}</div></div>`}
+
+// ===== Daily briefing
+document.addEventListener('toggle',e=>{if(e.target.classList&&e.target.classList.contains('brief'))ST.set('briefOpen',e.target.open)},true);
+function briefing(){const L=live();if(!L.length)return '';const nw=L.filter(isFresh),sn=L.filter(soon).sort(byClose),sv=mine(),lines=[];
+  const top=a=>{const c={};a.forEach(t=>c[catOf(t)]=(c[catOf(t)]||0)+1);const e=Object.entries(c).sort((x,y)=>y[1]-x[1])[0];return e?e[0]:''};
+  lines.push(`${L.length} open tenders from ${new Set(L.map(org)).size} organisations.`);
+  if(nw.length)lines.push(`${nw.length} new in the last ${NEW_DAYS} days${top(nw)?', mostly '+top(nw):''}.`);
+  if(sn.length)lines.push(`${sn.length} closing this week. First up: “${sn[0].title}” (${pill(sn[0])[0]}).`);
+  if(sv.length){const act=sv.filter(t=>['todo','prep','ready'].includes(wstat(t))),u=act.filter(t=>dleft(t)!==null&&dleft(t)>=0&&dleft(t)<=3).length;
+    lines.push(`You’re tracking ${sv.length}: ${sv.filter(t=>wstat(t)==='sub').length} submitted, ${act.length} in progress${u?`, ${u} need action within 3 days`:''}.`)}
+  const ch=L.filter(recentChg).length;if(ch)lines.push(`⚠️ ${ch} deadline${ch>1?'s':''} changed in the last 2 weeks.`);
+  const txt='Tender briefing, '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long'})+'\n'+lines.map(l=>'• '+l).join('\n');
+  return `<details class="brief"${ST.get('briefOpen',true)?' open':''}><summary>📰 Today’s briefing</summary><ul>${lines.map(l=>`<li>${esc(l)}</li>`).join('')}</ul><a class="chip" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(txt)}">💬 Share on WhatsApp</a></details>`}
+
+// ===== CSV export, guide, install
+function exportCsv(){const r=rows(),q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const head=['Title','Organisation','Reference','Type','Method','Closes','Days left','Category','Status','Saved','Link'];
+  const body=r.map(t=>[t.title,org(t),t.reference,t.type,t.method,t.closing_text||t.closing||'',dleft(t)??'',catOf(t),t.status,SAVED.has(t.id)?'yes':'',t.url].map(q).join(','));
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+[head.map(q).join(','),...body].join('\r\n')],{type:'text/csv'}));a.download='tenders-'+iso(new Date())+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('⬇ '+r.length+' tenders downloaded. Opens in Excel.')}
+function openGuide(){DR=null;$('dr').innerHTML=`<button class="x" data-close="1" aria-label="Close">✕</button><h3>Welcome 👋</h3><p class="en">A one-minute tour of what this tracker does for you.</p>
+  <div class="gd"><p>★ <b>Star</b> a tender to keep it. Starred tenders get a full-screen <b>workspace</b> with a calendar, a checklist and progress up to submission.</p>
+  <p>🎯 <b>Watchlist</b>: type keywords such as “solar, roads”. Matches are highlighted, and <b>✨ Picked for you</b> learns from what you star.</p>
+  <p>📄 <b>Tender X-ray</b>: tap a card to see dates, site visits and bid security found inside the PDF itself.</p>
+  <p>⚠️ <b>Deadline changes</b> are flagged, so an extension never catches you out. ⏱ A <b>prep-time check</b> warns when you are short of time.</p>
+  <p>⌕ Press <b>Ctrl+K</b> to jump anywhere. 📲 Install it as an app: it keeps working offline with the last data.</p>
+  <p>🖨️ Print a one-page summary, ⬇ export to Excel, or 💬 share on WhatsApp.</p></div><div class="acts"><button class="btn pri" data-close="1">Got it, let’s go</button></div>`;
+  $('dr').classList.add('on');$('sc').classList.add('on');$('dr').scrollTop=0}
+let IP=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();IP=e});
+function installApp(){if(IP){IP.prompt();IP=null}else toast('On your phone: browser menu, then “Add to Home screen”')}
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 load(true);setInterval(tick,30000);setInterval(spotTick,1000);setInterval(load,300000);
 </script></body></html>
