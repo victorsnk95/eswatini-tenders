@@ -2,12 +2,16 @@
 into tenders.json (new / open / expired / removed).  Run: python scraper.py
 Source types in sources.json:  "esppra" (ESPPRA list), "res" (RES tabbed tables),
 "links" (generic: any tender-looking link or PDF on a page)."""
-import hashlib, json, re, sys, time, datetime as dt
+import hashlib, io, json, re, sys, time, datetime as dt
 from pathlib import Path
 from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
 from dateutil import parser as dparse
+try:
+    from pypdf import PdfReader
+except ImportError:          # the X-ray feature simply switches itself off
+    PdfReader = None
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "tenders.json"
@@ -134,6 +138,74 @@ def fetch(s):
     html = get(s["url"].split("#")[0]).text
     return parse_res(html, s) if t == "res" else parse_links(html, s)
 
+# ---------------------------------------------------------------- merge + change tracking
+def merge(db, it):
+    """Add or update one tender. Records deadline changes (extensions) so the dashboard can warn about them."""
+    tid = hashlib.sha1(it["url"].encode()).hexdigest()[:12]
+    rec = db.get(tid, {"id": tid, "first_seen": now()})
+    if tid in db and rec.get("closing_src") != "pdf":
+        for f in ("closing", "title"):
+            if rec.get(f) and it.get(f) and rec[f] != it[f]:
+                rec.setdefault("changes", []).append({"at": now(), "field": f, "from": rec[f], "to": it[f]})
+    new = dict(it)
+    if not new.get("closing") and rec.get("closing_src") == "pdf":   # keep a deadline we read from the PDF
+        new.pop("closing", None); new.pop("closing_text", None)
+    elif new.get("closing"):
+        rec.pop("closing_src", None)
+    rec.update(new, last_seen=now()); db[tid] = rec
+    return tid
+
+# ---------------------------------------------------------------- tender X-ray (reads the PDF itself)
+M = r"(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*"
+DATE_PAT = re.compile(rf"(\d{{1,2}}(?:st|nd|rd|th)?\s+(?:of\s+)?{M}\.?,?\s+\d{{4}}|{M}\.?\s+\d{{1,2}}(?:st|nd|rd|th)?,?\s+\d{{4}}|\d{{1,2}}[/-]\d{{1,2}}[/-]\d{{4}})", re.I)
+PDF_RE = re.compile(r"\.pdf(\?|$)", re.I)
+
+def near(text, kw, width=200):
+    """First sensible date that appears shortly after a keyword."""
+    lo, hi = dt.date.today() - dt.timedelta(days=30), dt.date.today() + dt.timedelta(days=500)
+    for m in re.finditer(kw, text, re.I):
+        d = DATE_PAT.search(text[m.end(): m.end() + width])
+        iso = to_iso(d.group(1)) if d else None
+        if iso and lo <= dt.date.fromisoformat(iso) <= hi: return iso
+    return None
+
+def xray_text(text):
+    out = {}
+    c = near(text, r"closing date|closing time|deadline|close[sd]? (?:on|at)|no later than|not later than|on or before|submitted? before")
+    v = near(text, r"site (?:visit|meeting|inspection)|pre-?bid|pre-?tender|briefing|clarification meeting")
+    if c: out["closing"] = c
+    if v: out["site_visit"] = v
+    m = re.search(r"(?:bid|tender)\s+(?:security|bond|guarantee)[^.]{0,160}?(E\s?\d[\d,. ]*\d|\d{1,2}(?:\.\d+)?\s?%)", text, re.I)
+    if m: out["security"] = re.sub(r"\s+", " ", m.group(1)).strip()
+    elif re.search(r"(?:bid|tender)\s+(?:security|bond|guarantee)", text, re.I): out["security"] = "Mentioned in the document"
+    m = re.search(r"(?:non-?refundable|tender fee|bidding document fee|fee of)[^.]{0,120}?(E\s?\d[\d,.]*\d)", text, re.I)
+    if m: out["fee"] = re.sub(r"\s+", " ", m.group(1)).strip()
+    return out
+
+def xray(url):
+    if PdfReader is None: raise RuntimeError("pypdf is not installed")
+    r = requests.get(url, headers=HEADERS, timeout=45); r.raise_for_status()
+    if len(r.content) > 12_000_000: return {}
+    pages = PdfReader(io.BytesIO(r.content)).pages[:10]
+    return xray_text(re.sub(r"\s+", " ", " ".join((p.extract_text() or "") for p in pages)))
+
+def enrich(db, limit=12):
+    """Reads up to `limit` new tender PDFs per run. Fills in a missing closing date when the document has one."""
+    done = 0
+    for rec in db.values():
+        if done >= limit: break
+        if rec.get("status") == "expired" or "intel" in rec or rec.get("intel_err", 0) >= 2: continue
+        if not PDF_RE.search(rec.get("url", "")): continue
+        done += 1
+        try:
+            rec["intel"] = xray(rec["url"])
+            ic = rec["intel"].get("closing")
+            if ic and not rec.get("closing"):
+                rec.update(closing=ic, closing_text=dt.date.fromisoformat(ic).strftime("%d %B %Y") + " (from document)", closing_src="pdf")
+        except Exception:
+            rec["intel_err"] = rec.get("intel_err", 0) + 1
+    return done
+
 # ---------------------------------------------------------------- main
 def main():
     old = json.loads(OUT.read_text()) if OUT.exists() else {"tenders": {}}
@@ -146,10 +218,9 @@ def main():
         except Exception as e:
             log.append(f'{s["name"]}: FAILED ({e})'); continue
         for it in items:
-            tid = hashlib.sha1(it["url"].encode()).hexdigest()[:12]
-            seen.add(tid)
-            rec = db.get(tid, {"id": tid, "first_seen": now()})
-            rec.update(it, last_seen=now()); db[tid] = rec
+            seen.add(merge(db, it))
+    n = enrich(db)
+    if n: log.append(f"X-ray: read {n} tender documents")
     today, cutoff = dt.date.today().isoformat(), (dt.date.today() - dt.timedelta(days=30)).isoformat()
     for tid in list(db):
         rec = db[tid]
