@@ -170,7 +170,7 @@ html,body{background:#fff!important;color:#000!important}body>*:not(#prs){displa
 <div class="seg"><button data-view="board">Board</button><button data-view="list">List</button><button data-view="cal">Calendar</button><button data-view="ins">Insights</button></div>
 <button class="kb" data-wsopen="1" title="Open your tender workspace">🗓️ Workspace</button>
 <button class="kb" data-pal="1" title="Command palette (Ctrl+K)">⌕ Ctrl K</button>
-<button class="kb" data-csv="1" title="Download the current list as a spreadsheet">⬇ CSV</button><button class="kb" data-guide="1" title="How to use this site">?</button>
+<button class="kb" data-guide="1" title="How to use this site">?</button>
 <label class="ck"><input type="checkbox" id="ex"> Show closed</label></div>
 <input id="wt" placeholder="🎯 Watchlist: keywords to highlight, comma separated (e.g. solar, roads, laptops)">
 <div class="chips" id="orgs"></div>
@@ -273,10 +273,10 @@ function load(first){return fetch('tenders.json?'+Date.now(),{cache:'no-store'})
 document.addEventListener('click',e=>{const X=e.target;
   if(X.id==='pl'){closePal();return}
   const pi=X.closest('[data-pi]');if(pi){palRun(+pi.dataset.pi);return}
-  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm],[data-wsopen],[data-print],[data-csv],[data-guide]');
+  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm],[data-wsopen],[data-print],[data-guide]');
   if(!b){const k=X.closest('[data-id]');if(k&&!X.closest('a'))openDr(k.dataset.id);return}
   const d=b.dataset;
-  if('wsopen' in d){openWs();return}if('print' in d){printSummary();return}if('csv' in d){exportCsv();return}if('guide' in d){openGuide();return}if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
+  if('wsopen' in d){openWs();return}if('print' in d){printSummary();return}if('guide' in d){openGuide();return}if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
   if('save' in d){SAVED.has(d.save)?SAVED.delete(d.save):SAVED.add(d.save);ST.set('saved',[...SAVED]);toast(SAVED.has(d.save)?'★ Saved to your shortlist':'Removed from your shortlist');render(true);
     const el=document.querySelector('.sv.on[data-save="'+d.save+'"]');if(el)el.classList.add('pop');if(DR)openDr(DR);return}
   if('ics' in d){ics(d.ics);toast('📅 Reminder downloaded: open it to add to your calendar');return}
@@ -336,7 +336,7 @@ function insights(){const L=live(),cc={},oc={};L.forEach(t=>{cc[catOf(t)]=(cc[ca
 function openPal(){$('pl').classList.add('on');$('pq').value='';PI=0;palRender();$('pq').focus()}
 function closePal(){$('pl').classList.remove('on')}
 function palRender(){const q=$('pq').value.toLowerCase().trim(),has=s=>!q||s.toLowerCase().includes(q),L=[];
-  [['🗓️','Open my tender workspace',()=>openWs()],['🖨️','Print my tender summary',()=>printSummary()],['⬇','Download this list as CSV',()=>exportCsv()],['📲','Install as an app',()=>installApp()],['❓','How to use this site',()=>openGuide()],['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
+  [['🗓️','Open my tender workspace',()=>openWs()],['🖨️','Print my tender summary',()=>printSummary()],['📲','Install as an app',()=>installApp()],['❓','How to use this site',()=>openGuide()],['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
   if(q){[...new Set(live().map(org))].filter(has).slice(0,4).forEach(o=>L.push({i:'🏢',t:o,s:'Filter by organisation',run:()=>{S.org=o;if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     CATS.filter(c=>c[0]!=='Other'&&has(c[0])).slice(0,3).forEach(c=>L.push({i:c[1],t:c[0],s:'Filter by type',run:()=>{S.cat=c[0];if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     live().filter(t=>has(t.title+' '+org(t)+' '+(t.reference||''))).slice(0,8).forEach(t=>L.push({i:'📄',t:t.title,s:org(t)+' · '+pill(t)[0],run:()=>openDr(t.id),keep:1}))}
@@ -444,18 +444,14 @@ function briefing(){const L=live();if(!L.length)return '';const nw=L.filter(isFr
   const txt='Tender briefing, '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long'})+'\n'+lines.map(l=>'• '+l).join('\n');
   return `<details class="brief"${ST.get('briefOpen',true)?' open':''}><summary>📰 Today’s briefing</summary><ul>${lines.map(l=>`<li>${esc(l)}</li>`).join('')}</ul><a class="chip" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(txt)}">💬 Share on WhatsApp</a></details>`}
 
-// ===== CSV export, guide, install
-function exportCsv(){const r=rows(),q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
-  const head=['Title','Organisation','Reference','Type','Method','Closes','Days left','Category','Status','Saved','Link'];
-  const body=r.map(t=>[t.title,org(t),t.reference,t.type,t.method,t.closing_text||t.closing||'',dleft(t)??'',catOf(t),t.status,SAVED.has(t.id)?'yes':'',t.url].map(q).join(','));
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+[head.map(q).join(','),...body].join('\r\n')],{type:'text/csv'}));a.download='tenders-'+iso(new Date())+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('⬇ '+r.length+' tenders downloaded. Opens in Excel.')}
+// ===== guide, install
 function openGuide(){DR=null;$('dr').innerHTML=`<button class="x" data-close="1" aria-label="Close">✕</button><h3>Welcome 👋</h3><p class="en">A one-minute tour of what this tracker does for you.</p>
   <div class="gd"><p>★ <b>Star</b> a tender to keep it. Starred tenders get a full-screen <b>workspace</b> with a calendar, a checklist and progress up to submission.</p>
   <p>🎯 <b>Watchlist</b>: type keywords such as “solar, roads”. Matches are highlighted, and <b>✨ Picked for you</b> learns from what you star.</p>
   <p>📄 <b>Tender X-ray</b>: tap a card to see dates, site visits and bid security found inside the PDF itself.</p>
   <p>⚠️ <b>Deadline changes</b> are flagged, so an extension never catches you out. ⏱ A <b>prep-time check</b> warns when you are short of time.</p>
   <p>⌕ Press <b>Ctrl+K</b> to jump anywhere. 📲 Install it as an app: it keeps working offline with the last data.</p>
-  <p>🖨️ Print a one-page summary, ⬇ export to Excel, or 💬 share on WhatsApp.</p></div><div class="acts"><button class="btn pri" data-close="1">Got it, let’s go</button></div>`;
+  <p>🖨️ Print a one-page summary, or 💬 share on WhatsApp.</p></div><div class="acts"><button class="btn pri" data-close="1">Got it, let’s go</button></div>`;
   $('dr').classList.add('on');$('sc').classList.add('on');$('dr').scrollTop=0}
 let IP=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();IP=e});
 function installApp(){if(IP){IP.prompt();IP=null}else toast('On your phone: browser menu, then “Add to Home screen”')}
