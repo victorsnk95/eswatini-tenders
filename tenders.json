@@ -1,11 +1,12 @@
 {
- "updated": "2026-11-20T04:52:04Z",
+ "updated": "2026-11-20T14:36:20Z",
  "log": [
-  "ESPPRA (official): 44 tenders",
+  "ESPPRA (official): 40 tenders",
   "EWADE: 10 tenders",
   "EWSC (Water Services Corporation): no tenders listed right now",
   "Royal Eswatini Sugar (RES): 8 tenders",
-  "Ubombo Sugar: no tenders listed right now"
+  "Ubombo Sugar: no tenders listed right now",
+  "X-ray: read 12 tender documents"
  ],
  "tenders": {
   "3017186ec44f": {
@@ -273,7 +274,10 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-20T04:51:55Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed",
+   "intel": {
+    "closing": "2026-11-15"
+   }
   },
   "638fb9bbfcc7": {
    "id": "638fb9bbfcc7",
@@ -289,7 +293,12 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-20T04:51:55Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed",
+   "intel": {
+    "closing": "2026-11-20",
+    "site_visit": "2026-10-23",
+    "security": "Mentioned in the document"
+   }
   },
   "73fa36ceac76": {
    "id": "73fa36ceac76",
@@ -305,7 +314,10 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-20T04:51:55Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed",
+   "intel": {
+    "closing": "2026-11-20"
+   }
   },
   "e83c280c4533": {
    "id": "e83c280c4533",
@@ -321,7 +333,12 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-20T04:51:55Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed",
+   "intel": {
+    "closing": "2026-11-20",
+    "security": "Mentioned in the document",
+    "fee": "E500.00"
+   }
   },
   "e3a506ebc242": {
    "id": "e3a506ebc242",
@@ -337,7 +354,13 @@
    "source": "ESPPRA (official)",
    "last_seen": "2026-11-20T04:51:55Z",
    "is_new": false,
-   "status": "open"
+   "status": "removed",
+   "intel": {
+    "closing": "2026-11-20",
+    "site_visit": "2026-11-06",
+    "security": "E10,000.00",
+    "fee": "E500"
+   }
   },
   "efff61610e30": {
    "id": "efff61610e30",
@@ -351,9 +374,12 @@
    "closing": "2026-11-23",
    "closing_text": "Monday 23rd November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
-   "status": "open"
+   "status": "open",
+   "intel": {
+    "closing": "2026-11-16"
+   }
   },
   "2dfeae2ecb13": {
    "id": "2dfeae2ecb13",
@@ -367,9 +393,15 @@
    "closing": "2026-11-27",
    "closing_text": "Friday 27th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
-   "status": "open"
+   "status": "open",
+   "intel": {
+    "closing": "2026-11-27",
+    "site_visit": "2026-10-29",
+    "security": "Mentioned in the document",
+    "fee": "E500.00"
+   }
   },
   "c9058c396f95": {
    "id": "c9058c396f95",
@@ -383,9 +415,15 @@
    "closing": "2026-11-27",
    "closing_text": "Friday 27th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
-   "status": "open"
+   "status": "open",
+   "intel": {
+    "closing": "2026-11-27",
+    "site_visit": "2026-11-27",
+    "security": "E 2,500.00",
+    "fee": "E1,500.00"
+   }
   },
   "c586f964cc07": {
    "id": "c586f964cc07",
@@ -399,9 +437,14 @@
    "closing": "2026-11-27",
    "closing_text": "Friday 27th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
-   "status": "open"
+   "status": "open",
+   "intel": {
+    "closing": "2026-11-27",
+    "site_visit": "2026-11-27",
+    "security": "Mentioned in the document"
+   }
   },
   "1bedefbc37c8": {
    "id": "1bedefbc37c8",
@@ -415,9 +458,15 @@
    "closing": "2026-11-28",
    "closing_text": "Saturday 28th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
-   "status": "open"
+   "status": "open",
+   "intel": {
+    "closing": "2026-11-27",
+    "site_visit": "2026-11-06",
+    "security": "Mentioned in the document",
+    "fee": "E500"
+   }
   },
   "dddaf1c20624": {
    "id": "dddaf1c20624",
@@ -431,9 +480,15 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
-   "status": "open"
+   "status": "open",
+   "intel": {
+    "closing": "2026-11-30",
+    "site_visit": "2026-11-30",
+    "security": "Mentioned in the document",
+    "fee": "E500.00"
+   }
   },
   "5f7f657a44b4": {
    "id": "5f7f657a44b4",
@@ -447,9 +502,15 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
-   "status": "open"
+   "status": "open",
+   "intel": {
+    "closing": "2026-11-30",
+    "site_visit": "2026-11-30",
+    "security": "Mentioned in the document",
+    "fee": "E500.00"
+   }
   },
   "6fbe757813a4": {
    "id": "6fbe757813a4",
@@ -463,7 +524,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -495,7 +556,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -511,7 +572,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -527,7 +588,7 @@
    "closing": "2026-12-02",
    "closing_text": "Wednesday 2nd December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -543,7 +604,7 @@
    "closing": "2026-12-07",
    "closing_text": "Monday 7th December 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -559,7 +620,7 @@
    "closing": "2026-12-07",
    "closing_text": "Monday 7th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -575,7 +636,7 @@
    "closing": "2026-12-10",
    "closing_text": "Thursday 10th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -607,7 +668,7 @@
    "closing": "2026-12-11",
    "closing_text": "Friday 11th December 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -623,7 +684,7 @@
    "closing": "2026-12-11",
    "closing_text": "Friday 11th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -639,7 +700,7 @@
    "closing": "2026-12-11",
    "closing_text": "Friday 11th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -655,7 +716,7 @@
    "closing": "2026-12-14",
    "closing_text": "Monday 14th December 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -671,7 +732,7 @@
    "closing": "2026-12-15",
    "closing_text": "Tuesday 15th December 2026 2:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -687,7 +748,7 @@
    "closing": "2026-12-21",
    "closing_text": "Monday 21st December 2026 4:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -703,7 +764,7 @@
    "closing": "2026-12-30",
    "closing_text": "Wednesday 30th December 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -719,7 +780,7 @@
    "closing": "2027-01-05",
    "closing_text": "Tuesday 5th January 2027 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -735,7 +796,7 @@
    "closing": "2026-11-27",
    "closing_text": "Friday 27th November 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -751,7 +812,7 @@
    "closing": "2026-12-14",
    "closing_text": "Monday 14th December 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -768,7 +829,7 @@
    "closing_text": "",
    "posted": "2026-10",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -785,7 +846,7 @@
    "closing_text": "",
    "posted": "2026-09",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -802,7 +863,7 @@
    "closing_text": "",
    "posted": "2026-07",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -819,7 +880,7 @@
    "closing_text": "",
    "posted": "2026-03",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -836,7 +897,7 @@
    "closing_text": "",
    "posted": "2026-02",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -853,7 +914,7 @@
    "closing_text": "",
    "posted": "2026-02",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -870,7 +931,7 @@
    "closing_text": "",
    "posted": "2026-01",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -887,7 +948,7 @@
    "closing_text": "",
    "posted": "2026-10",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -904,7 +965,7 @@
    "closing_text": "",
    "posted": "2026-07",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -921,7 +982,7 @@
    "closing_text": "",
    "posted": "2025-02",
    "source": "EWADE",
-   "last_seen": "2026-11-20T04:51:57Z",
+   "last_seen": "2026-11-20T14:35:59Z",
    "is_new": false,
    "status": "open"
   },
@@ -937,7 +998,7 @@
    "closing": "2026-12-02",
    "closing_text": "2026-12-02",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -953,7 +1014,7 @@
    "closing": "2026-11-20",
    "closing_text": "2026-11-20",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -969,7 +1030,7 @@
    "closing": "2026-11-27",
    "closing_text": "2026-11-27",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -985,7 +1046,7 @@
    "closing": "2026-12-03",
    "closing_text": "2026-12-03",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -1001,7 +1062,7 @@
    "closing": "2026-11-20",
    "closing_text": "2026-11-20",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -1017,7 +1078,7 @@
    "closing": "2026-12-03",
    "closing_text": "2026-12-03",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -1033,7 +1094,7 @@
    "closing": "2026-12-14",
    "closing_text": "Monday 14th December 2026 11:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1049,7 +1110,7 @@
    "closing": "2026-12-14",
    "closing_text": "Monday 14th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1065,7 +1126,7 @@
    "closing": "2026-12-14",
    "closing_text": "Monday 14th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1081,7 +1142,7 @@
    "closing": "2026-12-16",
    "closing_text": "Wednesday 16th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1097,7 +1158,7 @@
    "closing": "2026-11-26",
    "closing_text": "Thursday 26th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1113,7 +1174,7 @@
    "closing": "2026-12-10",
    "closing_text": "Thursday 10th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1129,7 +1190,7 @@
    "closing": "2026-12-15",
    "closing_text": "Tuesday 15th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1145,7 +1206,7 @@
    "closing": "2026-12-15",
    "closing_text": "Tuesday 15th December 2026 4:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1161,7 +1222,7 @@
    "closing": "2026-12-16",
    "closing_text": "Wednesday 16th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1177,7 +1238,7 @@
    "closing": "2027-01-08",
    "closing_text": "Friday 8th January 2027 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1193,7 +1254,7 @@
    "closing": "2026-12-04",
    "closing_text": "2026-12-04",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -1209,7 +1270,7 @@
    "closing": "2026-11-30",
    "closing_text": "Monday 30th November 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1225,7 +1286,7 @@
    "closing": "2026-12-16",
    "closing_text": "Wednesday 16th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1241,7 +1302,7 @@
    "closing": "2026-12-17",
    "closing_text": "Thursday 17th December 2026 12:00 pm",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1257,7 +1318,7 @@
    "closing": "2027-01-22",
    "closing_text": "Friday 22nd January 2027 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
    "status": "open"
   },
@@ -1273,7 +1334,7 @@
    "closing": "2026-12-11",
    "closing_text": "2026-12-11",
    "source": "Royal Eswatini Sugar (RES)",
-   "last_seen": "2026-11-20T04:52:02Z",
+   "last_seen": "2026-11-20T14:36:05Z",
    "is_new": false,
    "status": "open"
   },
@@ -1289,8 +1350,24 @@
    "closing": "2026-12-17",
    "closing_text": "Thursday 17th December 2026 10:00 am",
    "source": "ESPPRA (official)",
-   "last_seen": "2026-11-20T04:51:55Z",
+   "last_seen": "2026-11-20T14:35:57Z",
    "is_new": false,
+   "status": "open"
+  },
+  "946cb77a1bc2": {
+   "id": "946cb77a1bc2",
+   "first_seen": "2026-11-20T14:35:57Z",
+   "title": "Consulting Firm for Social and Environmental Safeguards",
+   "url": "https://esppra.co.sz/documents/tenders/Eswatini%20Environment%20Authority%20_EEA_/tender_20261120_130052_c1704e67e691596f.pdf",
+   "entity": "Eswatini Environment Authority (EEA)",
+   "reference": "26 of EEA2026/27",
+   "method": "Request For Proposal",
+   "type": "Open Tender",
+   "closing": "2026-12-11",
+   "closing_text": "Friday 11th December 2026 12:00 pm",
+   "source": "ESPPRA (official)",
+   "last_seen": "2026-11-20T14:35:57Z",
+   "is_new": true,
    "status": "open"
   }
  }
