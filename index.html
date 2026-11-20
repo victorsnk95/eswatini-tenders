@@ -132,6 +132,20 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .wi{border:1px solid var(--bd);border-radius:12px;padding:9px 11px;margin-bottom:8px;cursor:pointer;background:var(--bg)}.wi.on{border-color:var(--yel);box-shadow:0 0 0 2px rgba(255,217,0,.35)}.wit{display:flex;justify-content:space-between;gap:8px;font-size:.88rem;font-weight:600}.wi small{color:var(--mu)}
 .wsb{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:16px;padding:14px 18px;margin:8px 0 14px;color:#fff;background:linear-gradient(120deg,#1d2f6b,#7c3aed)}.wsb small{display:block;opacity:.85}.wsb .btn{background:#fff;color:#1d2f6b;border:0}
 @media(max-width:860px){.wb{grid-template-columns:1fr;overflow:auto;display:block}.wg{min-height:62vh}.wside{border-left:0;border-top:1px solid var(--bd);overflow:visible}.wch{font-size:.6rem}}
+
+@page{size:A4 landscape;margin:10mm}
+#prs{display:none}
+@media print{
+html,body{background:#fff!important;color:#000!important}body>*:not(#prs){display:none!important}body::before{display:none!important}
+#prs{display:block;font:11px/1.35 system-ui,"Segoe UI",Arial,sans-serif;color:#000}
+.pr h1{font:800 1.5rem Sora,system-ui,sans-serif;margin:0;color:#000;background:none}.pr p{margin:2px 0;color:#444}
+.prh{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:3px solid #3e5eb9;padding-bottom:6px;margin-bottom:8px}
+.prk{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.prk span{border:1px solid #999;border-radius:99px;padding:1px 9px;font-size:.78rem}
+.pr table{width:100%;border-collapse:collapse}.pr th{background:#eef1f8;text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;padding:4px 6px;border-bottom:1px solid #999;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr td{padding:4px 6px;border-bottom:1px solid #ddd;vertical-align:top}.pr td small{display:block;color:#555}.pr tr{break-inside:avoid}.pr tr.dim{color:#666}
+.stp{display:inline-block;border-radius:99px;padding:1px 8px;font-size:.72rem;font-weight:700;color:#fff;print-color-adjust:exact;-webkit-print-color-adjust:exact}.stp.s-drop{text-decoration:none;color:#444!important;background:#ddd}
+.ppg{height:6px;border:1px solid #999;border-radius:4px;overflow:hidden;margin-bottom:2px}.ppg i{display:block;height:100%;background:#3e5eb9;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr.sm{font-size:9.5px}.pr.xs{font-size:8px}.prf{margin-top:8px;font-size:.72rem;color:#666}}
 </style></head><body>
 <div class="flag"></div>
 <div class="wrap">
@@ -156,6 +170,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 </div>
 <div class="sc" id="sc" data-close="1"></div><aside class="dr" id="dr" aria-label="Tender details"></aside>
 <div class="pl" id="pl"><div class="pb"><input id="pq" placeholder="Search tenders, jump to a view, filter by organisation…" autocomplete="off"><div id="pr"></div></div></div>
+<div id="prs"></div>
 <section class="ws" id="ws" aria-label="My tender workspace"></section>
 <div class="ts" id="ts"></div>
 <script>
@@ -224,7 +239,7 @@ function orgs(){const c={};live().forEach(t=>c[org(t)]=(c[org(t)]||0)+1);
 function main(){
   const r=T.filter(t=>(S.mode==='saved'||t.status==='open'||(S.exp&&t.status==='expired'))&&match(t));
   const day=S.day?`<p><button class="chip on" data-day="${S.day}">Closing on ${S.day} ✕</button></p>`:'';
-  const cp=S.mode==='saved'&&r.length?'<div class="wsb"><div><b>🗓️ My Tender Workspace</b><small>Track your starred tenders on a full-screen calendar, with checklists and progress until you submit.</small></div><button class="btn pri" data-wsopen="1">Open workspace →</button></div><p><button class="chip cp" data-copy="1">📋 Copy shortlist</button></p>':'';
+  const cp=S.mode==='saved'&&r.length?'<div class="wsb"><div><b>🗓️ My Tender Workspace</b><small>Track your starred tenders on a full-screen calendar, with checklists and progress until you submit.</small></div><button class="btn pri" data-wsopen="1">Open workspace →</button></div><p><button class="chip cp" data-copy="1">📋 Copy shortlist</button> <button class="chip cp" data-print="1">🖨️ Print summary</button></p>':'';
   if(!r.length)return day+(S.mode==='saved'?'<div class="empty"><h3>★ Your shortlist is empty</h3>Tap the star on any tender to keep it here. Saved tenders stay in this browser, even after they close.</div>':'<div class="empty"><h3>Nothing here, yet.</h3>The radar checks again every couple of hours. Try clearing a filter.</div>');
   const g={};r.forEach(t=>(g[laneOf(t)]=g[laneOf(t)]||[]).push(t));
   const html=LANES.filter(([k])=>g[k]).map(([k,title,sub])=>{
@@ -245,10 +260,10 @@ function load(first){return fetch('tenders.json?'+Date.now(),{cache:'no-store'})
 document.addEventListener('click',e=>{const X=e.target;
   if(X.id==='pl'){closePal();return}
   const pi=X.closest('[data-pi]');if(pi){palRun(+pi.dataset.pi);return}
-  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm],[data-wsopen]');
+  const b=X.closest('[data-mode],[data-org],[data-day],[data-view],[data-more],[data-save],[data-ics],[data-cat],[data-copy],[data-theme],[data-close],[data-share],[data-pal],[data-cm],[data-wsopen],[data-print]');
   if(!b){const k=X.closest('[data-id]');if(k&&!X.closest('a'))openDr(k.dataset.id);return}
   const d=b.dataset;
-  if('wsopen' in d){openWs();return}if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
+  if('wsopen' in d){openWs();return}if('print' in d){printSummary();return}if('close' in d){closeDr();return}if('pal' in d){openPal();return}if('share' in d){shareT(d.share);return}
   if('save' in d){SAVED.has(d.save)?SAVED.delete(d.save):SAVED.add(d.save);ST.set('saved',[...SAVED]);toast(SAVED.has(d.save)?'★ Saved to your shortlist':'Removed from your shortlist');render(true);
     const el=document.querySelector('.sv.on[data-save="'+d.save+'"]');if(el)el.classList.add('pop');if(DR)openDr(DR);return}
   if('ics' in d){ics(d.ics);toast('📅 Reminder downloaded: open it to add to your calendar');return}
@@ -308,7 +323,7 @@ function insights(){const L=live(),cc={},oc={};L.forEach(t=>{cc[catOf(t)]=(cc[ca
 function openPal(){$('pl').classList.add('on');$('pq').value='';PI=0;palRender();$('pq').focus()}
 function closePal(){$('pl').classList.remove('on')}
 function palRender(){const q=$('pq').value.toLowerCase().trim(),has=s=>!q||s.toLowerCase().includes(q),L=[];
-  [['🗓️','Open my tender workspace',()=>openWs()],['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
+  [['🗓️','Open my tender workspace',()=>openWs()],['🖨️','Print my tender summary',()=>printSummary()],['🗂️','Board view',()=>S.view='board'],['📋','List view',()=>S.view='list'],['📅','Calendar view',()=>S.view='cal'],['📊','Insights',()=>S.view='ins'],['★','Show my saved tenders',()=>{S.mode='saved';S.view='board'}],['⏰','Closing this week',()=>{S.mode='soon';S.view='board'}],['✨','New tenders',()=>{S.mode='new';S.view='board'}],['🌗','Switch light / dark',setTheme],['↺','Clear all filters',clearF]].filter(a=>has(a[1])).forEach(a=>L.push({i:a[0],t:a[1],s:'Action',run:a[2]}));
   if(q){[...new Set(live().map(org))].filter(has).slice(0,4).forEach(o=>L.push({i:'🏢',t:o,s:'Filter by organisation',run:()=>{S.org=o;if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     CATS.filter(c=>c[0]!=='Other'&&has(c[0])).slice(0,3).forEach(c=>L.push({i:c[1],t:c[0],s:'Filter by type',run:()=>{S.cat=c[0];if(S.view==='ins'||S.view==='cal')S.view='board'}}));
     live().filter(t=>has(t.title+' '+org(t)+' '+(t.reference||''))).slice(0,8).forEach(t=>L.push({i:'📄',t:t.title,s:org(t)+' · '+pill(t)[0],run:()=>openDr(t.id),keep:1}))}
@@ -345,16 +360,29 @@ function wsRender(){const L=mine(),now=new Date(),first=new Date(now.getFullYear
   for(let n=1;n<=last.getDate();n++){const k=iso(new Date(first.getFullYear(),first.getMonth(),n)),a=by[k]||[];
     cells+=`<div class="wd${k===iso(now)?' td':''}"><b>${n}</b>${a.slice(0,4).map(t=>`<div class="wch s-${wstat(t)}${WS.sel===t.id?' sel':''}" data-ws="${esc(t.id)}" title="${esc(t.title)}">${wstat(t)==='sub'?'✓ ':''}${esc(t.title)}</div>`).join('')}${a.length>4?`<small>+${a.length-4} more</small>`:''}</div>`}
   const sel=L.find(t=>t.id===WS.sel),C=[['todo','Not started','#3e5eb9'],['prep','Preparing','#c76a00'],['ready','Ready','#7c3aed'],['sub','Submitted','#0f8a4f'],['miss','Missed','#b10c0c']];
-  $('ws').innerHTML=`<div class="wh"><h2>🗓️ My Tender Workspace</h2><div class="wcnt">${C.filter(c=>cnt[c[0]]).map(c=>`<span style="background:${c[2]}">${cnt[c[0]]} ${c[1]}</span>`).join('')}</div>${urg?`<span class="wurg">⚠️ ${urg} closing within 3 days and not submitted</span>`:''}<span class="sp1"></span><button class="btn" data-wsclose="1">✕ Close (Esc)</button></div>
+  $('ws').innerHTML=`<div class="wh"><h2>🗓️ My Tender Workspace</h2><div class="wcnt">${C.filter(c=>cnt[c[0]]).map(c=>`<span style="background:${c[2]}">${cnt[c[0]]} ${c[1]}</span>`).join('')}</div>${urg?`<span class="wurg">⚠️ ${urg} closing within 3 days and not submitted</span>`:''}<span class="sp1"></span><button class="btn" data-wsprint="1">🖨️ Print summary</button><button class="btn" data-wsclose="1">✕ Close (Esc)</button></div>
   <div class="wb"><div class="wc"><div class="wnav"><button class="chip" data-wscm="-1">‹</button><h3>${first.toLocaleString('en',{month:'long',year:'numeric'})}</h3><button class="chip" data-wscm="1">›</button><button class="chip" data-wscm="today">Today</button></div>
   <div class="wdw">${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(x=>`<div>${x}</div>`).join('')}</div><div class="wg">${cells}</div></div>
   <div class="wside">${L.length?(sel?wsDetail(sel):'')+`<h4 style="margin:6px 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mu)">All saved tenders (${L.length})</h4>`+L.map(t=>`<div class="wi${WS.sel===t.id?' on':''}" data-ws="${esc(t.id)}"><div class="wit"><span>${esc(t.title)}</span><span class="pill ${wstat(t)==='sub'?'p0':pill(t)[1]}">${wstat(t)==='sub'?'submitted':pill(t)[0]}</span></div><small>${esc(org(t))}${t.closing?'':' · no deadline on listing'}</small><div class="pg"><i style="width:${wprog(t.id)}%"></i></div></div>`).join(''):'<div class="empty"><h3>★ Nothing saved yet</h3>Close this window and tap the star on a tender. It will appear here, on the calendar, ready for tracking.</div>'}</div></div>`}
-$('ws').addEventListener('click',e=>{const b=e.target.closest('[data-ws],[data-wsst],[data-wsclose],[data-wscm]');if(!b)return;const d=b.dataset;
-  if('wsclose' in d){closeWs();return}
+$('ws').addEventListener('click',e=>{const b=e.target.closest('[data-ws],[data-wsst],[data-wsclose],[data-wscm],[data-wsprint]');if(!b)return;const d=b.dataset;
+  if('wsprint' in d){printSummary();return}if('wsclose' in d){closeWs();return}
   if('wscm' in d){WS.cm=d.wscm==='today'?0:WS.cm+(+d.wscm);wsRender();return}
   if('wsst' in d&&WS.sel){const w=wk(WS.sel);w.st=d.wsst;if(d.wsst==='sub'){w.sub=iso(new Date());CHK.forEach((_,i)=>w.chk[i]=true);toast('🎉 Marked as submitted. Well done!')}wsave();wsRender();return}
   if('ws' in d){WS.sel=d.ws;wsRender()}});
 $('ws').addEventListener('change',e=>{const c=e.target.closest('[data-wsck]');if(!c||!WS.sel)return;const w=wk(WS.sel);w.chk[+c.dataset.wsck]=c.checked;autoStage(w);wsave();wsRender()});
 $('ws').addEventListener('input',e=>{if(e.target.id==='wsn'&&WS.sel){wk(WS.sel).note=e.target.value;wsave()}});
+
+const rk=t=>{const s=wstat(t);return s==='sub'?1:s==='drop'?2:0};
+const SL={todo:'Not started',prep:'Preparing',ready:'Ready',sub:'Submitted',miss:'Missed',drop:'Not bidding'};
+function buildPrs(){const L=mine().sort((a,b)=>rk(a)-rk(b)||byClose(a,b)),n=L.length,act=L.filter(t=>rk(t)===0),nx=act.find(t=>dleft(t)!==null&&dleft(t)>=0),cnt={};
+  L.forEach(t=>{const s=wstat(t);cnt[s]=(cnt[s]||0)+1});
+  const rowsH=L.map((t,i)=>{const w=WORK[t.id]||{chk:[],note:''},s=wstat(t),p=wprog(t.id),d=dleft(t),off=s==='sub'||s==='drop';
+    return `<tr class="${rk(t)?'dim':''}"><td>${i+1}</td><td><b>${esc(t.title)}</b><small>${esc(org(t))}</small></td><td>${esc(t.reference||'')}</td><td>${esc(t.closing_text||t.closing||'See notice')}</td><td>${s==='sub'?'✓':d===null?'—':d<0?'passed':d}</td><td><span class="stp s-${s}">${SL[s]}</span></td><td><div class="ppg"><i style="width:${p}%"></i></div>${p}%</td><td>${off?'—':esc(CHK.find((_,j)=>!w.chk[j])||'')}${w.note?`<small><i>Note: ${esc(w.note.slice(0,90))}</i></small>`:''}</td></tr>`}).join('');
+  $('prs').innerHTML=`<div class="pr${n>24?' xs':n>16?' sm':''}"><div class="prh"><div><h1>Sandile Tender Tracker</h1><p>My tender summary · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</p>${nx?`<p><b>Next deadline:</b> ${esc(nx.title)} (${esc(nx.closing_text||nx.closing)})</p>`:''}</div>
+  <div class="prk">${Object.keys(SL).filter(k=>cnt[k]).map(k=>`<span>${cnt[k]} ${SL[k]}</span>`).join('')}</div></div>
+  ${n?`<table><thead><tr><th>#</th><th>Tender and organisation</th><th>Ref</th><th>Closes</th><th>Days left</th><th>Stage</th><th>Progress</th><th>Next step</th></tr></thead><tbody>${rowsH}</tbody></table>`:'<p>No saved tenders yet. Tap the star on a tender to add it to your summary.</p>'}
+  <p class="prf">Verify every detail on the original tender notice before submitting. Printed from your Tender Tracker.</p></div>`}
+function printSummary(){buildPrs();window.print()}
+window.addEventListener('beforeprint',buildPrs);
 load(true);setInterval(tick,30000);setInterval(spotTick,1000);setInterval(load,300000);
 </script></body></html>
